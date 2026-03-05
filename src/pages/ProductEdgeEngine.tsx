@@ -97,7 +97,7 @@ const ProductEdgeEngine = () => {
 
     try {
       // Using the absolute URL to target the remote environment as XAMPP is not installed locally
-      const response = await fetch("http://202.59.208.112/websites/sohub-vision-spark-main/api/send-ai-order.php", {
+      const response = await fetch("/server-api/send-ai-order.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
