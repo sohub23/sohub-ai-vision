@@ -3,6 +3,13 @@
  * Standalone SOHUB AI Vision Edge Engine Email Handler
  */
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
+
+require_once __DIR__ . '/Exception.php';
+require_once __DIR__ . '/PHPMailer.php';
+require_once __DIR__ . '/SMTP.php';
+
 error_reporting(E_ALL);
 ini_set('display_errors', 0);
 ini_set('log_errors', 1);
@@ -159,60 +166,32 @@ try {
 }
 
 function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent, $toName) {
-    $socket = stream_socket_client("tcp://$host:$port", $errno, $errstr, 15);
-    if (!$socket) throw new Exception("Connection failed: $errstr");
-    
-    fgets($socket, 515);
-    fputs($socket, "EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost') . "\r\n");
-    do { $response = fgets($socket, 515); } while (substr($response, 3, 1) === '-');
-    
-    fputs($socket, "STARTTLS\r\n");
-    fgets($socket, 515);
-    stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
-    
-    fputs($socket, "EHLO " . ($_SERVER['SERVER_NAME'] ?? 'localhost') . "\r\n");
-    do { $response = fgets($socket, 515); } while (substr($response, 3, 1) === '-');
-    
-    fputs($socket, "AUTH LOGIN\r\n");
-    fgets($socket, 515);
-    fputs($socket, base64_encode($user) . "\r\n");
-    fgets($socket, 515);
-    fputs($socket, base64_encode($pass) . "\r\n");
-    fgets($socket, 515);
-    
-    fputs($socket, "MAIL FROM: <$user>\r\n");
-    fgets($socket, 515);
-    fputs($socket, "RCPT TO: <$to>\r\n");
-    fgets($socket, 515);
-    fputs($socket, "DATA\r\n");
-    fgets($socket, 515);
-    
-    $boundary = md5(time());
-    $emailContents = "From: SOHUB AI Vision <$user>\r\n";
-    $emailContents .= "To: $toName <$to>\r\n";
-    $emailContents .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
-    $emailContents .= "MIME-Version: 1.0\r\n";
-    $emailContents .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n\r\n";
-    
-    $emailContents .= "--$boundary\r\n";
-    $emailContents .= "Content-Type: text/html; charset=UTF-8\r\n";
-    $emailContents .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-    $emailContents .= $body . "\r\n\r\n";
-    
-    if ($pdfContent !== null) {
-        $emailContents .= "--$boundary\r\n";
-        $emailContents .= "Content-Type: application/pdf; name=\"Quotation.pdf\"\r\n";
-        $emailContents .= "Content-Transfer-Encoding: base64\r\n";
-        $emailContents .= "Content-Disposition: attachment; filename=\"Quotation.pdf\"\r\n\r\n";
-        $emailContents .= chunk_split(base64_encode($pdfContent)) . "\r\n";
+    $mail = new PHPMailer(true);
+    try {
+        $mail->isSMTP();
+        $mail->Host       = $host;
+        $mail->SMTPAuth   = true;
+        $mail->Username   = $user;
+        $mail->Password   = $pass;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = $port;
+
+        $mail->setFrom($user, 'SOHUB AI Vision');
+        $mail->addAddress($to, $toName);
+        
+        $mail->CharSet = 'UTF-8';
+
+        if ($pdfContent !== null) {
+            $mail->addStringAttachment($pdfContent, 'Quotation.pdf', PHPMailer::ENCODING_BASE64, 'application/pdf');
+        }
+
+        $mail->isHTML(true);
+        $mail->Subject = $subject;
+        $mail->Body    = $body;
+
+        $mail->send();
+    } catch (PHPMailerException $e) {
+        throw new Exception("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
     }
-    
-    $emailContents .= "--$boundary--\r\n";
-    $emailContents .= ".\r\n";
-    
-    fputs($socket, $emailContents);
-    fgets($socket, 515);
-    fputs($socket, "QUIT\r\n");
-    fclose($socket);
 }
 ?>
