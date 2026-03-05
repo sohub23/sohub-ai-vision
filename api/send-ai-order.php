@@ -158,7 +158,7 @@ try {
     echo json_encode(['success' => false, 'error' => 'Email failed: ' . $e->getMessage()]);
 }
 
-function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent, $toName, $cc = null, $replyTo = null) {
+function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent, $toName) {
     $socket = stream_socket_client("tcp://$host:$port", $errno, $errstr, 15);
     if (!$socket) throw new Exception("Connection failed: $errstr");
     
@@ -184,23 +184,13 @@ function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent
     fgets($socket, 515);
     fputs($socket, "RCPT TO: <$to>\r\n");
     fgets($socket, 515);
-    if ($cc) {
-        fputs($socket, "RCPT TO: <$cc>\r\n");
-        fgets($socket, 515);
-    }
     fputs($socket, "DATA\r\n");
     fgets($socket, 515);
     
-    $boundary = md5(uniqid(rand(), true));
-    $messageId = "<" . md5(uniqid(rand(), true)) . "@" . ($_SERVER['SERVER_NAME'] ?? 'localhost') . ">";
-    
+    $boundary = md5(time());
     $emailContents = "From: SOHUB AI Vision <$user>\r\n";
     $emailContents .= "To: $toName <$to>\r\n";
-    if ($cc) $emailContents .= "Cc: $cc\r\n";
-    if ($replyTo) $emailContents .= "Reply-To: $replyTo\r\n";
     $emailContents .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
-    $emailContents .= "Message-ID: $messageId\r\n";
-    $emailContents .= "Date: " . date("r") . "\r\n";
     $emailContents .= "MIME-Version: 1.0\r\n";
     $emailContents .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n\r\n";
     
