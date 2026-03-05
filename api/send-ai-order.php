@@ -194,13 +194,13 @@ function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent
     $boundary = md5(uniqid(rand(), true));
     $messageId = "<" . md5(uniqid(rand(), true)) . "@" . ($_SERVER['SERVER_NAME'] ?? 'localhost') . ">";
     
-    $emailContents = "Date: " . date("r") . "\r\n";
-    $emailContents .= "Message-ID: $messageId\r\n";
-    $emailContents .= "From: SOHUB AI Vision <$user>\r\n";
-    if ($replyTo) $emailContents .= "Reply-To: $replyTo\r\n";
+    $emailContents = "From: SOHUB AI Vision <$user>\r\n";
     $emailContents .= "To: $toName <$to>\r\n";
     if ($cc) $emailContents .= "Cc: $cc\r\n";
+    if ($replyTo) $emailContents .= "Reply-To: $replyTo\r\n";
     $emailContents .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
+    $emailContents .= "Message-ID: $messageId\r\n";
+    $emailContents .= "Date: " . date("r") . "\r\n";
     $emailContents .= "MIME-Version: 1.0\r\n";
     $emailContents .= "Content-Type: multipart/mixed; boundary=\"$boundary\"\r\n\r\n";
     
