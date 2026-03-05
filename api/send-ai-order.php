@@ -142,14 +142,13 @@ if ($productType === 'edge-engine-custom') {
 }
 
 try {
-    // Send to Admin first
+    // 1. Send purely to Admin (No CC/BCC links)
     sendEmail($smtp_host, $smtp_port, $smtp_user, $smtp_pass, $admin_email, $subjectTitle, $adminEmailBody, $pdfContent, 'SOHUB Admin');
     
-    // Then send confirmation to Customer
+    // 2. Send purely to Customer (If provided)
     if (!empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $msg = ($productType === 'edge-engine-custom') ? "Custom Request Received" : "Order Confirmation";
-        // Also CC the admin back on the customer email for tracking
-        sendEmail($smtp_host, $smtp_port, $smtp_user, $smtp_pass, $email, "$msg - SOHUB AI Vision", $customerEmailBody, $pdfContent, $name, $admin_email);
+        sendEmail($smtp_host, $smtp_port, $smtp_user, $smtp_pass, $email, "$msg - SOHUB AI Vision", $customerEmailBody, $pdfContent, $name);
     }
     
     echo json_encode(['success' => true, 'message' => 'Your request has been sent successfully.']);
