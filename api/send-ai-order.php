@@ -51,7 +51,7 @@ $smtp_host = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com';
 $smtp_port = (int)($_ENV['SMTP_PORT'] ?? 587);
 $smtp_user = $_ENV['SMTP_USER'] ?? '';
 $smtp_pass = $_ENV['SMTP_PASS'] ?? '';
-$admin_email = $_ENV['ADMIN_EMAIL'] ?? 'muyed@sohub.com.bd';
+$admin_email = !empty($_ENV['ADMIN_EMAIL']) ? trim($_ENV['ADMIN_EMAIL']) : 'muyed@sohub.com.bd';
 
 if (empty($smtp_user) || empty($smtp_pass)) {
     http_response_code(500);
@@ -159,7 +159,7 @@ try {
     echo json_encode(['success' => false, 'error' => 'Email failed: ' . $e->getMessage()]);
 }
 
-function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent, $toName, $cc = null) {
+function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent, $toName, $cc = null, $replyTo = null) {
     $socket = stream_socket_client("tcp://$host:$port", $errno, $errstr, 15);
     if (!$socket) throw new Exception("Connection failed: $errstr");
     
@@ -192,8 +192,13 @@ function sendEmail($host, $port, $user, $pass, $to, $subject, $body, $pdfContent
     fputs($socket, "DATA\r\n");
     fgets($socket, 515);
     
-    $boundary = md5(time());
-    $emailContents = "From: SOHUB AI Vision <$user>\r\n";
+    $boundary = md5(uniqid(rand(), true));
+    $messageId = "<" . md5(uniqid(rand(), true)) . "@" . ($_SERVER['SERVER_NAME'] ?? 'localhost') . ">";
+    
+    $emailContents = "Date: " . date("r") . "\r\n";
+    $emailContents .= "Message-ID: $messageId\r\n";
+    $emailContents .= "From: SOHUB AI Vision <$user>\r\n";
+    if ($replyTo) $emailContents .= "Reply-To: $replyTo\r\n";
     $emailContents .= "To: $toName <$to>\r\n";
     if ($cc) $emailContents .= "Cc: $cc\r\n";
     $emailContents .= "Subject: =?UTF-8?B?" . base64_encode($subject) . "?=\r\n";
