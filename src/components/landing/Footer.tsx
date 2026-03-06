@@ -8,7 +8,7 @@ const socialLinks = [
 
 const Footer = () => (
   <footer className="py-16 border-t border-border bg-sohub-gray-50">
-    <div className="container mx-auto px-6">
+    <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
       <div className="grid md:grid-cols-4 gap-10 mb-12">
         {/* Brand */}
         <div className="md:col-span-2">
