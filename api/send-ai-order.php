@@ -160,6 +160,7 @@ try {
     foreach ($adminRecipients as $recipient) {
         try {
             sendEmail($smtp_host, $smtp_port, $smtp_user, $smtp_pass, $recipient, $subjectTitle, $adminEmailBody, $pdfContent, 'SOHUB Admin');
+            error_log("AI Order admin email sent to $recipient");
         } catch (Exception $e) {
             $adminErrors[] = "Admin ($recipient): " . $e->getMessage();
             error_log("AI Order admin email failed for $recipient: " . $e->getMessage());
@@ -177,10 +178,15 @@ try {
         echo json_encode([
             'success' => true,
             'message' => 'Request submitted. Customer email sent, but some admin deliveries failed.',
+            'adminDelivery' => false,
             'adminErrors' => $adminErrors
         ]);
     } else {
-        echo json_encode(['success' => true, 'message' => 'Your request has been sent successfully.']);
+        echo json_encode([
+            'success' => true,
+            'message' => 'Your request has been sent successfully.',
+            'adminDelivery' => true
+        ]);
     }
     
 } catch (Exception $e) {
