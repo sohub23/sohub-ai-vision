@@ -33,8 +33,38 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
+  const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    if (!isHome) {
+      setActiveSection("");
+      return;
+    }
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0% -35% 0%",
+      threshold: 0.2,
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    const sections = ["problem", "capabilities", "deployment", "faq"];
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [isHome]);
 
   useEffect(() => {
     fetch("https://sohub.netlify.app/api/initiatives.json", {
@@ -156,16 +186,25 @@ const Navbar = () => {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8 text-sm text-muted-foreground">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={getHref(link.href)}
-                className="hover:text-foreground transition-colors relative group"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-sohub-orange group-hover:w-full transition-all duration-300" />
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = isHome && activeSection === link.href.split("#")[1];
+              return (
+                <a
+                  key={link.href}
+                  href={getHref(link.href)}
+                  className={`transition-colors relative py-1 group ${isActive ? "text-foreground font-semibold" : "hover:text-foreground"
+                    }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeUnderline"
+                      className="absolute -bottom-1 left-0 w-full h-[3px] bg-sohub-orange rounded-full"
+                    />
+                  )}
+                </a>
+              );
+            })}
           </div>
 
           <div className="flex items-center gap-3">
@@ -206,16 +245,20 @@ const Navbar = () => {
               className="md:hidden overflow-hidden border-t border-border/40 bg-background/95 backdrop-blur-xl"
             >
               <div className="px-6 py-4 space-y-1">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.href}
-                    href={getHref(link.href)}
-                    onClick={() => setOpen(false)}
-                    className="block py-3 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+                {navLinks.map((link) => {
+                  const isActive = isHome && activeSection === link.href.split("#")[1];
+                  return (
+                    <a
+                      key={link.href}
+                      href={getHref(link.href)}
+                      onClick={() => setOpen(false)}
+                      className={`block py-3 text-sm transition-colors ${isActive ? "text-sohub-orange font-bold" : "text-muted-foreground hover:text-foreground font-medium"
+                        }`}
+                    >
+                      {link.label}
+                    </a>
+                  );
+                })}
                 <div className="pt-3 flex items-center gap-2">
                   {socialLinks.map((link) => (
                     <a

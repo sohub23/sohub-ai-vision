@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/landing/ScrollReveal";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import aiEngineImg from "@/assets/ai_engine.png";
 
 const specs = [
   { label: "Channels", value: "4 / 8 / scalable" },
@@ -84,6 +85,20 @@ const ProductEdgeEngine = () => {
   const basePrice = tiers[selectedTier].price;
   const addOnTotal = selectedAddOns.reduce((sum, idx) => sum + addOns[idx].price, 0);
   const totalPrice = basePrice + addOnTotal;
+
+  const handleCheckoutStep = () => {
+    setStep("checkout");
+    setTimeout(() => {
+      document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  };
+
+  const handleConfigureStep = () => {
+    setStep("configure");
+    setTimeout(() => {
+      document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -194,7 +209,10 @@ const ProductEdgeEngine = () => {
                 ))}
               </div>
 
-              <Button variant="hero" size="lg" className="rounded-xl text-base px-10 py-6 shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.4)]">
+              <Button
+                onClick={() => document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' })}
+                variant="hero" size="lg" className="rounded-xl text-base px-10 py-6 shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.4)]"
+              >
                 Request a Quote
               </Button>
             </motion.div>
@@ -208,8 +226,8 @@ const ProductEdgeEngine = () => {
               <div className="w-full max-w-md relative">
                 {/* Glow */}
                 <div className="absolute inset-0 bg-gradient-to-br from-sohub-orange/[0.06] to-transparent rounded-3xl blur-2xl scale-110" />
-                <div className="relative p-10 rounded-3xl border border-border/60 bg-gradient-to-br from-background via-secondary/30 to-secondary/10 shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.06)]">
-                  <EdgeEngineSVGLarge />
+                <div className="relative rounded-3xl border border-border/60 bg-gradient-to-br from-background via-secondary/30 to-secondary/10 shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.06)] group">
+                  <img src={aiEngineImg} alt="SOHUB AI Vision Edge Engine" className="w-full h-auto object-cover rounded-3xl group-hover:scale-105 transition-transform duration-700" />
                   {/* Floating label */}
                   <motion.div
                     animate={{ y: [0, -6, 0] }}
@@ -459,7 +477,7 @@ const ProductEdgeEngine = () => {
                             whileHover={{ y: -2 }}
                             onClick={() => {
                               setSelectedTier(i);
-                              if (i === 2) setStep("checkout");
+                              if (i === 2) handleCheckoutStep();
                             }}
                             className={`p-5 rounded-2xl border-2 cursor-pointer transition-all duration-200 text-center ${selectedTier === i
                               ? "border-sohub-orange/40 bg-gradient-to-b from-sohub-orange/[0.06] to-transparent shadow-sm"
@@ -549,7 +567,7 @@ const ProductEdgeEngine = () => {
                         )}
                       </div>
 
-                      <Button onClick={() => setStep("checkout")} variant="hero" size="lg" className="w-full rounded-xl py-6 text-base group shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.4)]">
+                      <Button onClick={handleCheckoutStep} variant="hero" size="lg" className="w-full rounded-xl py-6 text-base group shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.4)]">
                         {selectedTier === 2 ? "Discuss Requirements" : "Continue to Order"}
                         <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
                       </Button>
@@ -564,7 +582,7 @@ const ProductEdgeEngine = () => {
 
             {!submitted && step === "checkout" && (
               <motion.div key="checkout" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.3 }} className="max-w-2xl mx-auto">
-                <button onClick={() => setStep("configure")} className="text-sm text-sohub-orange mb-8 hover:underline flex items-center font-medium gap-1.5 transition-colors">
+                <button onClick={handleConfigureStep} className="text-sm text-sohub-orange mb-8 hover:underline flex items-center font-medium gap-1.5 transition-colors">
                   <ArrowLeft className="w-4 h-4" /> Back to Configuration
                 </button>
 
