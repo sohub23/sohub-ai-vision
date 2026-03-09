@@ -110,7 +110,7 @@ const About = () => {
                         <ScrollReveal>
                             <div className="max-w-2xl mx-auto text-center space-y-6 text-[#6B7280] leading-relaxed">
                                 <p>
-                                    In today's world, security is often a trade-off. You either pay high monthly fees to global tech giants, or you settle for "dumb" cameras that only show you what you've already lost. At SOHUB AI, we believe this is a compromise you shouldn't have to make.
+                                    In today's world, security is often a trade-off. You either pay high monthly fees to global tech giants, or you settle for cameras that only show you what you've already lost. At SOHUB AI, we believe this is a compromise you shouldn't have to make.
                                 </p>
                                 <p className="text-[#0DC7FF] font-medium">
                                     We are here to lead the shift to Edge Intelligence — through hardware innovation and the courage to bring you processing power that rivals the best global brands — but built for the real infrastructure of Bangladesh.
