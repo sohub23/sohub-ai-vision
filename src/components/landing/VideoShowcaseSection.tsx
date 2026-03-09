@@ -23,9 +23,17 @@ const allVideos: VideoItem[] = [
 const VideoShowcaseSection = () => {
   const [activeVideoId, setActiveVideoId] = useState(allVideos[0].id);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const videoFrameRef = useRef<HTMLDivElement>(null);
 
   const activeVideo = allVideos.find(v => v.id === activeVideoId) || allVideos[0];
   const thumbnailVideos = allVideos.filter(v => v.id !== activeVideoId);
+
+  const handleThumbnailClick = (videoId: string) => {
+    setActiveVideoId(videoId);
+    if (videoFrameRef.current) {
+      videoFrameRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
 
   const scroll = (dir: "left" | "right") => {
     if (carouselRef.current) {
@@ -53,7 +61,7 @@ const VideoShowcaseSection = () => {
 
         {/* Main Player */}
         <ScrollReveal>
-          <div className="max-w-4xl mx-auto mb-8">
+          <div ref={videoFrameRef} className="max-w-4xl mx-auto mb-8 scroll-mt-24">
             <div className="relative rounded-2xl overflow-hidden border border-border bg-secondary/30 shadow-xl">
               <div className="aspect-video">
                 {activeVideo.type === "youtube" ? (
@@ -118,7 +126,7 @@ const VideoShowcaseSection = () => {
                 key={video.id}
                 whileHover={{ y: -4 }}
                 className="group cursor-pointer flex-shrink-0 w-[240px] snap-start"
-                onClick={() => setActiveVideoId(video.id)}
+                onClick={() => handleThumbnailClick(video.id)}
               >
                 <div className="relative rounded-xl overflow-hidden border border-border bg-secondary/30 hover:border-sohub-orange/30 hover:shadow-lg transition-all duration-300">
                   <div className="aspect-video">
