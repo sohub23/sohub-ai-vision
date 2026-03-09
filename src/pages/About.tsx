@@ -120,30 +120,6 @@ const About = () => {
                                 </p>
                             </div>
                         </ScrollReveal>
-
-                        {/* Brand Layer */}
-                        <ScrollReveal>
-                            <Card className="border-none bg-[#111827] text-white rounded-3xl overflow-hidden mt-10">
-                                <CardContent className="p-10 text-center">
-                                    <h2 className="text-[1.25rem] font-bold mb-10">Brand Layer</h2>
-                                    <div className="space-y-10 text-left max-w-xl mx-auto">
-                                        <div className="space-y-2">
-                                            <h4 className="font-bold text-[#0DC7FF]">SOHUB AI Vision (Mother Brand)</h4>
-                                            <p className="text-sm text-gray-400">
-                                                Build an ecosystem of proactive intelligence for security, productivity, and hazards — focused on privacy, trust, and local reliability.
-                                            </p>
-                                        </div>
-                                        <div className="h-px bg-gray-800" />
-                                        <div className="space-y-2">
-                                            <h4 className="font-bold">AI Vision Edge Engine (First Initiative)</h4>
-                                            <p className="text-sm text-gray-400">
-                                                Start a movement to turn existing surveillance into intelligent networks by bringing GPU-powered processing to every LAN in Bangladesh.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </CardContent>
-                            </Card>
-                        </ScrollReveal>
                     </div>
                 </div>
             </main>
