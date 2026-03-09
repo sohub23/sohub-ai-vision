@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -9,15 +9,26 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import aiEngineImg from "@/assets/ai_engine.png";
 
-const specs = [
-  { label: "Channels", value: "4 / 8 / scalable" },
-  { label: "Processing", value: "Edge GPU (NVIDIA)" },
-  { label: "Connectivity", value: "LAN / ONVIF / RTSP" },
-  { label: "Power", value: "12V DC / PoE" },
-  { label: "Form Factor", value: "Compact 1U rack-mount or desktop" },
-  { label: "Storage", value: "Local NVR + optional NAS" },
-  { label: "AI Models", value: "20+ detection models" },
-  { label: "Latency", value: "< 200ms real-time" },
+const specs4Channel = [
+  { label: "Processor", value: "NPU 4Tops, CPU 8 Cores" },
+  { label: "Graphics", value: "Decoder/Encoder: 4 Channel H.264/H.265 1080P@25FPS" },
+  { label: "Memory", value: "Capacity: 8GB, eMMC: 64GB" },
+  { label: "I/O Ports", value: "1x Gigabit Ethernet, 1x USB 3.0, 3x USB 2.0, Type-C OTG" },
+  { label: "Display & Audio", value: "HDMI-OUT x1, 3.5mm Audio interface x1" },
+  { label: "Other Interfaces", value: "12V output x2, RS485, GPIO, DEBUG" },
+  { label: "Power", value: "DC +12V/2A (~8W Consumption)" },
+  { label: "Dimensions (W×D×H)", value: "210mm × 140mm × 32mm" },
+];
+
+const specs8Channel = [
+  { label: "Processor", value: "NPU 5Tops, CPU Cortex-A76 + Cortex-A55 8-core 2.4GHz" },
+  { label: "Graphics", value: "Decoder/Encoder: 8 Channel H.264/H.265 1080P@25FPS" },
+  { label: "Memory", value: "Capacity: 8GB, eMMC: 128GB" },
+  { label: "I/O Ports", value: "2x Gigabit Ethernet, 1x USB 3.0, 1x USB 2.0, Type-C OTG" },
+  { label: "Display & Audio", value: "HDMI-OUT x1, HDMI-IN x1, 3.5mm Audio interface x1" },
+  { label: "Other Interfaces", value: "12V output, RS485 x2, GPIO, DEBUG" },
+  { label: "Power", value: "DC +12V/2A (~8W Consumption)" },
+  { label: "Dimensions (W×D×H)", value: "235mm × 150mm × 62.5mm" },
 ];
 
 const benefits = [
@@ -30,10 +41,10 @@ const benefits = [
 ];
 
 const addOns = [
-  { id: "install", name: "Professional Installation", priceStr: "৳5,000", price: 5000, desc: "On-site setup and camera configuration" },
-  { id: "training", name: "On-Site Training", priceStr: "৳3,000", price: 3000, desc: "Staff training on dashboard and alerts" },
-  { id: "warranty", name: "Extended Warranty", priceStr: "৳8,000/yr", price: 8000, desc: "Additional 1-year hardware warranty" },
-  { id: "support", name: "Priority Support", priceStr: "৳5,000/yr", price: 5000, desc: "Dedicated support line and 4-hour response" },
+  { id: "install", name: "Professional Installation", priceStr: "5,000 BDT", price: 5000, desc: "On-site setup and camera configuration" },
+  { id: "training", name: "On-Site Training", priceStr: "3,000 BDT", price: 3000, desc: "Staff training on dashboard and alerts" },
+  { id: "warranty", name: "Extended Warranty", priceStr: "8,000 BDT/yr", price: 8000, desc: "Additional 1-year hardware warranty" },
+  { id: "support", name: "Priority Support", priceStr: "5,000 BDT/yr", price: 5000, desc: "Dedicated support line and 4-hour response" },
 ];
 
 const faqs = [
@@ -69,14 +80,23 @@ const ProductEdgeEngine = () => {
   const [form, setForm] = useState({ name: "", company: "", phone: "", email: "", location: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [activeSpecTab, setActiveSpecTab] = useState(0);
+
+  useEffect(() => {
+    if (window.location.hash === '#order-section') {
+      setTimeout(() => {
+        document.getElementById('order-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }, []);
 
   const tiers = [
-    { channels: "4 Channels", priceStr: "৳95,000", price: 95000, desc: "Ideal for small setups — shops, clinics, offices" },
-    { channels: "8 Channels", priceStr: "৳1,50,000", price: 150000, desc: "For mid-size deployments — warehouses, schools, factories" },
+    { channels: "4 Channels", priceStr: "95,000 BDT", price: 95000, desc: "Ideal for small setups — shops, clinics, offices" },
+    { channels: "8 Channels", priceStr: "1,50,000 BDT", price: 150000, desc: "For mid-size deployments — warehouses, schools, factories" },
     { channels: "8+ Channels", priceStr: null, price: 0, desc: "Custom configuration for large-scale or enterprise needs" },
   ];
 
-  const formatPrice = (n: number) => `৳${n.toLocaleString("en-BD")}`;
+  const formatPrice = (n: number) => `${n.toLocaleString("en-BD")} BDT`;
 
   const toggleAddOn = (i: number) => {
     setSelectedAddOns(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]);
@@ -105,7 +125,6 @@ const ProductEdgeEngine = () => {
     setLoading(true);
 
     const currentTier = tiers[selectedTier];
-    const selectedAddOnNames = selectedAddOns.map(idx => addOns[idx].name);
 
     // Determine if this is a custom request (8+ Channels)
     const isCustom = selectedTier === 2;
@@ -123,7 +142,10 @@ const ProductEdgeEngine = () => {
           machineType: `AI Vision Edge Engine — ${currentTier.channels}`,
           unitPrice: isCustom ? 0 : currentTier.price,
           quantity: 1,
-          addOns: selectedAddOnNames,
+          addOns: selectedAddOns.map(idx => ({
+            name: addOns[idx].name,
+            price: addOns[idx].price
+          })),
           totalPrice: isCustom ? 0 : totalPrice,
         }),
       });
@@ -153,8 +175,8 @@ const ProductEdgeEngine = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="SOHUB AI Vision Edge Engine – Centralized AI for CCTV | From ৳95,000"
-        description="Process 4-8+ cameras with one device. NVIDIA GPU-powered edge AI for your existing CCTV network. 100% offline, no cloud fees. Starting from ৳95,000."
+        title="SOHUB AI Vision Edge Engine – Centralized AI for CCTV | From 95,000 BDT"
+        description="Process 4-8+ cameras with one device. NVIDIA GPU-powered edge AI for your existing CCTV network. 100% offline, no cloud fees. Starting from 95,000 BDT."
         path="/products/edge-engine"
       />
       <Navbar />
@@ -190,7 +212,7 @@ const ProductEdgeEngine = () => {
 
               <div className="flex items-baseline gap-2 mb-6">
                 <span className="text-sm text-muted-foreground">Starting from</span>
-                <span className="text-4xl md:text-5xl font-extrabold text-foreground">৳95,000</span>
+                <span className="text-4xl md:text-5xl font-extrabold text-foreground">95,000 BDT</span>
               </div>
 
               {/* Trust points */}
@@ -405,18 +427,35 @@ const ProductEdgeEngine = () => {
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Specs</p>
             <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
           </ScrollReveal>
-          <div className="max-w-2xl mx-auto bg-background rounded-3xl border border-border/80 overflow-hidden shadow-[0_4px_20px_-8px_hsl(0,0%,0%,0.05)]">
-            {specs.map((s, i) => (
+          <div className="flex justify-center mb-10">
+            <div className="inline-flex bg-secondary/50 p-1 rounded-xl">
+              <button
+                onClick={() => setActiveSpecTab(0)}
+                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 0 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                4 Channels
+              </button>
+              <button
+                onClick={() => setActiveSpecTab(1)}
+                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 1 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+              >
+                8 Channels
+              </button>
+            </div>
+          </div>
+
+          <div className="max-w-3xl mx-auto bg-background rounded-3xl border border-border/80 overflow-hidden shadow-[0_4px_20px_-8px_hsl(0,0%,0%,0.05)]">
+            {(activeSpecTab === 0 ? specs4Channel : specs8Channel).map((s, i) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                key={`${activeSpecTab}-${i}`}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04 }}
-                className={`flex justify-between items-center py-5 px-7 ${i < specs.length - 1 ? "border-b border-border/50" : ""} ${i % 2 === 0 ? "bg-secondary/15" : ""}`}
+                className={`flex justify-between items-center py-5 px-7 ${i < (activeSpecTab === 0 ? specs4Channel : specs8Channel).length - 1 ? "border-b border-border/50" : ""} ${i % 2 === 0 ? "bg-secondary/15" : ""}`}
               >
-                <span className="text-sm font-semibold text-foreground">{s.label}</span>
-                <span className="text-sm text-muted-foreground font-medium">{s.value}</span>
+                <span className="text-sm font-semibold text-foreground w-1/3">{s.label}</span>
+                <span className="text-sm text-muted-foreground font-medium w-2/3 text-right">{s.value}</span>
               </motion.div>
             ))}
           </div>

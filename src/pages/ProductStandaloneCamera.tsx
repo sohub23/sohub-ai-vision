@@ -7,16 +7,19 @@ import ScrollReveal from "@/components/landing/ScrollReveal";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import aiCameraImg from "@/assets/ai-vision-4p.png";
 
 const specs = [
-  { label: "Resolution", value: "2MP / 4MP options" },
-  { label: "Processing", value: "Built-in AI chipset" },
-  { label: "Connectivity", value: "Ethernet / Wi-Fi" },
-  { label: "Power", value: "12V DC / PoE" },
-  { label: "Weather Rating", value: "IP67 outdoor rated" },
-  { label: "Night Vision", value: "IR up to 30m" },
-  { label: "AI Models", value: "Essential safety models" },
-  { label: "Latency", value: "< 300ms on-device" },
+  { label: "Image Sensor", value: "1/2.7\" CMOS" },
+  { label: "Max Resolution", value: "4MP (2560 x 1440) @ 25fps" },
+  { label: "Wide Dynamic Range", value: "≥120dB True WDR" },
+  { label: "Field of View", value: "52.2°(D) / 46.2°(H) / 27°(V)" },
+  { label: "Focal Length", value: "6mm Fixed (F2.0)" },
+  { label: "Illumination", value: "20m Full-Color (5 Warm Lights)" },
+  { label: "Video Compression", value: "H.265 / H.264 / MJPEG" },
+  { label: "Protection Level", value: "IP66 / 4KV Surge" },
+  { label: "Operating Temp", value: "-10℃ to +60℃" },
+  { label: "Power Supply", value: "DC12V-24V / POE" },
 ];
 
 const benefits = [
@@ -29,10 +32,10 @@ const benefits = [
 ];
 
 const addOns = [
-  { id: "install", name: "Professional Installation", priceStr: "৳2,000", price: 2000, desc: "On-site mounting and network setup" },
-  { id: "training", name: "On-Site Training", priceStr: "৳1,500", price: 1500, desc: "Walkthrough of features and alert config" },
-  { id: "warranty", name: "Extended Warranty", priceStr: "৳2,000/yr", price: 2000, desc: "Additional 1-year device warranty" },
-  { id: "mount", name: "Mounting Kit (Pole/Wall)", priceStr: "৳500", price: 500, desc: "Heavy-duty mount bracket included" },
+  { id: "install", name: "Professional Installation", priceStr: "2,000 BDT", price: 2000, desc: "On-site mounting and network setup" },
+  { id: "training", name: "On-Site Training", priceStr: "1,500 BDT", price: 1500, desc: "Walkthrough of features and alert config" },
+  { id: "warranty", name: "Extended Warranty", priceStr: "2,000 BDT/yr", price: 2000, desc: "Additional 1-year device warranty" },
+  { id: "mount", name: "Mounting Kit (Pole/Wall)", priceStr: "500 BDT", price: 500, desc: "Heavy-duty mount bracket included" },
 ];
 
 const faqs = [
@@ -48,16 +51,16 @@ const videos = [
 
 const trustPoints = [
   { icon: <WifiOff className="w-4 h-4" />, label: "100% Offline" },
-  { icon: <Shield className="w-4 h-4" />, label: "IP67 Outdoor" },
-  { icon: <Clock className="w-4 h-4" />, label: "< 300ms On-Device" },
+  { icon: <Shield className="w-4 h-4" />, label: "IP66 Weatherproof" },
+  { icon: <Eye className="w-4 h-4" />, label: "20m Full-Color Night" },
   { icon: <BadgeCheck className="w-4 h-4" />, label: "1 Year Warranty" },
 ];
 
 const highlights = [
   { num: "4MP", label: "Max Resolution" },
-  { num: "30m", label: "Night Vision" },
-  { num: "<300", label: "ms Latency" },
-  { num: "0", label: "Monthly Fees" },
+  { num: "20m", label: "Full-Color Night" },
+  { num: "IP66", label: "Weather Proof" },
+  { num: "4", label: "AI Algorithms" },
 ];
 
 const aiModels = [
@@ -70,12 +73,18 @@ const ProductStandaloneCamera = () => {
   const [selectedAddOns, setSelectedAddOns] = useState<number[]>([]);
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [step, setStep] = useState<"configure" | "checkout">("configure");
+  const [selectedAlgoCount, setSelectedAlgoCount] = useState<1 | 4>(1);
   const [form, setForm] = useState({ name: "", company: "", phone: "", email: "", location: "", notes: "" });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const basePrice = 8000;
-  const formatPrice = (n: number) => `৳${n.toLocaleString("en-BD")}`;
+  const algoPrices = {
+    1: 12500,
+    4: 25000,
+  };
+
+  const basePrice = algoPrices[selectedAlgoCount];
+  const formatPrice = (n: number) => `${n.toLocaleString("en-BD")} BDT`;
 
   const toggleAddOn = (i: number) => {
     setSelectedAddOns(prev => prev.includes(i) ? prev.filter(x => x !== i) : [...prev, i]);
@@ -102,7 +111,10 @@ const ProductStandaloneCamera = () => {
     e.preventDefault();
     setLoading(true);
 
-    const selectedAddOnNames = selectedAddOns.map(idx => addOns[idx].name);
+    const selectedAddOnDetails = selectedAddOns.map(idx => ({
+      name: addOns[idx].name,
+      price: addOns[idx].price
+    }));
 
     try {
       const response = await fetch("/server-api/send-ai-order.php", {
@@ -113,10 +125,10 @@ const ProductStandaloneCamera = () => {
         body: JSON.stringify({
           ...form,
           productType: "standalone-camera",
-          machineType: "SOHUB Vision AI Camera",
+          machineType: `SOHUB Vision AI Camera (${selectedAlgoCount} Algo)`,
           unitPrice: basePrice,
           quantity: 1,
-          addOns: selectedAddOnNames,
+          addOns: selectedAddOnDetails,
           totalPrice: totalPrice,
         }),
       });
@@ -145,8 +157,8 @@ const ProductStandaloneCamera = () => {
   return (
     <div className="min-h-screen bg-background">
       <SEOHead
-        title="SOHUB Vision AI Camera – Standalone Smart Camera | From ৳8,000"
-        description="All-in-one AI camera with built-in intelligence. No external hardware needed. IP67 outdoor rated, 30m night vision. Starting from ৳8,000."
+        title="SOHUB Vision AI Camera – All-in-One Smart AI Camera | From 12,500 BDT"
+        description="4MP Full-Color AI camera with 13+ built-in algorithms. IP66 weatherproof, ≥120dB WDR, and offline processing. Starting from 12,500 BDT."
         path="/products/standalone-camera"
       />
       <Navbar />
@@ -181,7 +193,7 @@ const ProductStandaloneCamera = () => {
 
               <div className="flex items-baseline gap-2 mb-6">
                 <span className="text-sm text-muted-foreground">Starting from</span>
-                <span className="text-4xl md:text-5xl font-extrabold text-foreground">৳8,000</span>
+                <span className="text-4xl md:text-5xl font-extrabold text-foreground">12,500 BDT</span>
               </div>
 
               {/* Trust points */}
@@ -216,12 +228,12 @@ const ProductStandaloneCamera = () => {
             >
               <div className="w-full max-w-md relative">
                 <div className="absolute inset-0 bg-gradient-to-br from-sohub-orange/[0.06] to-transparent rounded-3xl blur-2xl scale-110" />
-                <div className="relative p-10 rounded-3xl border border-border/60 bg-gradient-to-br from-background via-secondary/30 to-secondary/10 shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.06)]">
-                  <AICameraSVGLarge />
+                <div className="relative p-4 rounded-3xl border border-border/60 bg-white shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.06)]">
+                  <img src={aiCameraImg} alt="SOHUB Vision AI Camera" className="w-full h-auto object-contain" />
                   <motion.div
-                    animate={{ y: [0, -6, 0] }}
+                    animate={{ y: [0, -5, 0] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute -top-3 right-6 px-3 py-1 rounded-full bg-sohub-orange text-primary-foreground text-[10px] font-bold tracking-wide uppercase shadow-lg"
+                    className="absolute -top-2.5 right-8 z-20 px-4 py-1.5 rounded-full bg-[#0DC7FF] text-white text-[10px] font-bold tracking-widest uppercase shadow-[0_10px_25px_-5px_rgba(13,199,255,0.5)] border border-white/20"
                   >
                     Plug & Play
                   </motion.div>
@@ -377,20 +389,33 @@ const ProductStandaloneCamera = () => {
                   <div className="lg:col-span-3 space-y-8">
                     {/* Main Product */}
                     <div>
-                      <h3 className="font-bold text-lg mb-4 text-foreground">Camera</h3>
-                      <div className="p-7 rounded-2xl border-2 border-sohub-orange/40 bg-gradient-to-br from-sohub-orange/[0.06] via-sohub-orange/[0.02] to-transparent shadow-sm">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-                          <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-2xl bg-sohub-orange/10 flex items-center justify-center text-sohub-orange">
-                              <Camera className="w-5 h-5" />
+                      <h3 className="font-bold text-lg mb-4 text-foreground">1. Choose AI Capability</h3>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        {[1, 4].map((count) => (
+                          <motion.div
+                            key={count}
+                            whileHover={{ y: -2 }}
+                            onClick={() => setSelectedAlgoCount(count as 1 | 4)}
+                            className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-200 ${selectedAlgoCount === count
+                              ? "border-sohub-orange/40 bg-gradient-to-br from-sohub-orange/[0.06] via-sohub-orange/[0.02] to-transparent shadow-sm"
+                              : "border-border bg-background hover:border-sohub-orange/20"
+                              }`}
+                          >
+                            <div className="flex justify-between items-start mb-4">
+                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${selectedAlgoCount === count ? "bg-sohub-orange/10 text-sohub-orange" : "bg-secondary text-muted-foreground"}`}>
+                                <Cpu className="w-5 h-5" />
+                              </div>
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedAlgoCount === count ? "border-sohub-orange bg-sohub-orange" : "border-border"}`}>
+                                {selectedAlgoCount === count && <div className="w-2 h-2 rounded-full bg-white" />}
+                              </div>
                             </div>
-                            <div>
-                              <h3 className="font-bold text-foreground text-lg">SOHUB Vision AI Camera</h3>
-                              <p className="text-sm text-muted-foreground mt-0.5">Standalone unit with built-in AI</p>
-                            </div>
-                          </div>
-                          <span className="text-2xl font-extrabold text-foreground whitespace-nowrap">৳8,000</span>
-                        </div>
+                            <h4 className="font-bold text-foreground text-lg mb-1">{count} AI Algorithm{count > 1 ? 's' : ''}</h4>
+                            <p className="text-xs text-muted-foreground mb-4">
+                              {count === 1 ? 'Essential detections' : 'Full suite of 4 detections'}
+                            </p>
+                            <span className="text-xl font-extrabold text-foreground">{formatPrice(algoPrices[count as 1 | 4])}</span>
+                          </motion.div>
+                        ))}
                       </div>
                     </div>
 
@@ -436,9 +461,9 @@ const ProductStandaloneCamera = () => {
                         <div className="flex justify-between items-start">
                           <div>
                             <p className="font-medium text-foreground">Vision AI Camera</p>
-                            <p className="text-sm text-muted-foreground">Standalone unit</p>
+                            <p className="text-sm text-muted-foreground">{selectedAlgoCount} AI Algorithm{selectedAlgoCount > 1 ? 's' : ''}</p>
                           </div>
-                          <span className="font-semibold text-foreground">৳8,000</span>
+                          <span className="font-semibold text-foreground">{formatPrice(basePrice)}</span>
                         </div>
 
                         {selectedAddOns.length > 0 && selectedAddOns.map(id => (
@@ -484,8 +509,8 @@ const ProductStandaloneCamera = () => {
                   <h3 className="font-bold text-lg mb-4 flex items-center gap-2 text-foreground"><ShoppingBag className="w-5 h-5 text-sohub-orange" /> Order Summary</h3>
                   <div className="text-sm space-y-2 text-muted-foreground">
                     <p className="font-medium text-foreground flex justify-between">
-                      <span>Vision AI Camera</span>
-                      <span>৳8,000</span>
+                      <span>Vision AI Camera ({selectedAlgoCount} Algo)</span>
+                      <span>{formatPrice(basePrice)}</span>
                     </p>
                     {selectedAddOns.map(id => (
                       <p key={id} className="flex justify-between">
@@ -573,9 +598,9 @@ const ProductStandaloneCamera = () => {
           <h3 className="text-xl font-bold text-foreground mb-4">
             Check out the <span className="text-sohub-orange">Edge Engine</span> for multi-camera setups.
           </h3>
-          <Link to="/products/edge-engine">
+          <Link to="/products/edge-engine#order-section">
             <Button variant="hero-outline" size="lg" className="rounded-xl text-sm px-8 py-5">
-              View Edge Engine — From ৳95,000
+              View Edge Engine — From 95,000 BDT
             </Button>
           </Link>
         </div>
@@ -618,32 +643,5 @@ const ProductStandaloneCamera = () => {
     </div>
   );
 };
-
-const AICameraSVGLarge = () => (
-  <motion.svg width="100%" viewBox="0 0 200 140" fill="none" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.6 }}>
-    <rect x="50" y="30" width="100" height="70" rx="12" stroke="hsl(var(--border))" strokeWidth="1.5" fill="hsl(var(--secondary))" />
-    <circle cx="100" cy="60" r="22" stroke="hsl(var(--border))" strokeWidth="1.5" fill="hsl(var(--background))" />
-    <circle cx="100" cy="60" r="14" stroke="hsl(var(--sohub-orange) / 0.4)" strokeWidth="1.5" fill="hsl(var(--sohub-orange) / 0.05)" />
-    <motion.circle cx="100" cy="60" r="6" fill="hsl(var(--sohub-orange) / 0.3)" animate={{ scale: [0.8, 1.1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} />
-    <rect x="68" y="86" width="24" height="8" rx="2" fill="hsl(var(--sohub-orange) / 0.15)" stroke="hsl(var(--sohub-orange) / 0.3)" strokeWidth="0.5" />
-    <text x="80" y="93" textAnchor="middle" fontSize="5" fontWeight="600" fill="hsl(var(--sohub-orange))">AI</text>
-    <rect x="92" y="100" width="16" height="20" rx="2" stroke="hsl(var(--border))" strokeWidth="1" fill="hsl(var(--secondary))" />
-    <rect x="82" y="118" width="36" height="6" rx="3" stroke="hsl(var(--border))" strokeWidth="1" fill="hsl(var(--secondary))" />
-    {[28, 36, 44].map((r, i) => (
-      <motion.circle
-        key={i}
-        cx="100"
-        cy="60"
-        r={r}
-        stroke="hsl(var(--sohub-orange) / 0.08)"
-        strokeWidth="1"
-        fill="none"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: [0.8, 1.1, 0.8], opacity: [0, 0.3, 0] }}
-        transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-      />
-    ))}
-  </motion.svg>
-);
 
 export default ProductStandaloneCamera;

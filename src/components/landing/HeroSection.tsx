@@ -61,7 +61,7 @@ const HeroSection = () => (
         >
           <div className="flex items-center gap-1">
             <span className="text-[10px] sm:text-xs text-muted-foreground">Starting from</span>
-            <span className="text-lg sm:text-xl font-extrabold text-foreground">৳8,000</span>
+            <span className="text-lg sm:text-xl font-extrabold text-foreground">12,500 BDT</span>
             <span className="text-[9px] sm:text-[10px] text-muted-foreground">/unit</span>
           </div>
           <a href="#deployment">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Facebook, Linkedin, Youtube, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -35,7 +35,21 @@ const Navbar = () => {
   const [initiatives, setInitiatives] = useState<Initiative[]>([]);
   const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    // Handle scrolling when arriving at homepage with a hash
+    if (isHome && location.hash) {
+      setTimeout(() => {
+        const id = location.hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    }
+  }, [isHome, location.hash]);
 
   useEffect(() => {
     if (!isHome) {
@@ -84,10 +98,25 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const getHref = (href: string) => {
-    // On home page, use just the hash; on other pages, use full path
-    if (isHome) return href.replace("/", "");
-    return href;
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isHashLink = href.startsWith("/#");
+
+    if (isHashLink) {
+      const hash = href.replace("/", "");
+
+      if (isHome) {
+        // If already on home page, prevent default router navigation and just scroll
+        e.preventDefault();
+        const id = hash.replace("#", "");
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", hash);
+        }
+      }
+      // If on another page, let Link component handle the navigation to /#hash
+      // The useEffect above will handle the scrolling once the page loads
+    }
   };
 
   return (
@@ -189,20 +218,17 @@ const Navbar = () => {
             {navLinks.map((link) => {
               const isActive = isHome && activeSection === link.href.split("#")[1];
               return (
-                <a
+                <Link
                   key={link.href}
-                  href={getHref(link.href)}
-                  className={`transition-colors relative py-1 group ${isActive ? "text-foreground font-semibold" : "hover:text-foreground"
+                  to={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`transition-all duration-200 px-4 py-2 rounded-full font-medium text-sm ${isActive
+                    ? "bg-sohub-orange/15 text-sohub-orange"
+                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
                     }`}
                 >
                   {link.label}
-                  {isActive && (
-                    <motion.span
-                      layoutId="activeUnderline"
-                      className="absolute -bottom-1 left-0 w-full h-[3px] bg-sohub-orange rounded-full"
-                    />
-                  )}
-                </a>
+                </Link>
               );
             })}
           </div>
@@ -248,15 +274,20 @@ const Navbar = () => {
                 {navLinks.map((link) => {
                   const isActive = isHome && activeSection === link.href.split("#")[1];
                   return (
-                    <a
+                    <Link
                       key={link.href}
-                      href={getHref(link.href)}
-                      onClick={() => setOpen(false)}
-                      className={`block py-3 text-sm transition-colors ${isActive ? "text-sohub-orange font-bold" : "text-muted-foreground hover:text-foreground font-medium"
+                      to={link.href}
+                      onClick={(e) => {
+                        handleNavClick(e, link.href);
+                        setOpen(false);
+                      }}
+                      className={`block py-3 px-4 rounded-xl text-base transition-colors ${isActive
+                        ? "bg-sohub-orange/10 text-sohub-orange font-semibold"
+                        : "text-foreground hover:bg-secondary"
                         }`}
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   );
                 })}
                 <div className="pt-3 flex items-center gap-2">

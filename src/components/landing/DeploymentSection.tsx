@@ -2,6 +2,7 @@ import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
 import { Server, Camera, Cpu, MonitorSpeaker, Layers, Zap, Box, Settings } from "lucide-react";
 import aiEngineImg from "@/assets/ai_engine.png";
+import aiCameraImg from "@/assets/ai-vision-4p.png";
 
 const DeploymentSection = () => (
   <section id="deployment" className="py-28 md:py-36 relative">
@@ -65,7 +66,7 @@ const DeploymentSection = () => (
               {/* Price */}
               <div className="flex items-baseline gap-2 mb-5">
                 <span className="text-sm text-muted-foreground">Starting from</span>
-                <span className="text-3xl font-extrabold text-foreground">৳95,000</span>
+                <span className="text-3xl font-extrabold text-foreground">95,000 BDT</span>
               </div>
 
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sohub-orange group-hover:gap-3 transition-all duration-300">
@@ -81,11 +82,18 @@ const DeploymentSection = () => (
             href="/products/standalone-camera"
             whileHover={{ y: -8 }}
             transition={{ duration: 0.3 }}
-            className="group relative flex flex-col h-full rounded-3xl border border-border/80 bg-background hover:border-sohub-orange/25 shadow-[0_1px_3px_0_hsl(0,0%,0%,0.04)] hover:shadow-[0_20px_50px_-12px_hsl(0,0%,0%,0.08)] transition-all duration-300 overflow-hidden"
+            className="group relative flex flex-col h-full rounded-3xl border border-border/80 bg-background hover:border-sohub-orange/25 shadow-[0_1px_3px_0_hsl(0,0%,0%,0.04)] hover:shadow-[0_20px_50px_-12px_hsl(0,0%,0%,0.08)] transition-all duration-300"
           >
             {/* Full Width Visual Section */}
-            <div className="w-full aspect-[4/3] bg-secondary/30 relative overflow-hidden flex items-center justify-center border-b border-border/40 group-hover:bg-secondary/40 transition-colors duration-300">
-              <AICameraSVG />
+            <div className="w-full aspect-[4/3] relative border-b border-border/40 bg-secondary/10 p-2">
+              <img src={aiCameraImg} alt="SOHUB Vision AI Camera" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-t-[22px]" />
+              <motion.div
+                animate={{ y: [0, -4, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-2 right-8 z-20 px-4 py-1.5 rounded-full bg-[#0DC7FF] text-white text-[10px] font-bold tracking-widest uppercase shadow-[0_8px_20px_-4px_rgba(13,199,255,0.4)] border border-white/20"
+              >
+                Plug & Play
+              </motion.div>
             </div>
 
             <div className="relative p-8 md:p-10 flex-1 flex flex-col">
@@ -118,7 +126,7 @@ const DeploymentSection = () => (
 
               <div className="flex items-baseline gap-2 mb-5">
                 <span className="text-sm text-muted-foreground">Starting from</span>
-                <span className="text-3xl font-extrabold text-foreground">৳8,000</span>
+                <span className="text-3xl font-extrabold text-foreground">12,500 BDT</span>
               </div>
 
               <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-sohub-orange group-hover:gap-3 transition-all duration-300">
@@ -130,43 +138,6 @@ const DeploymentSection = () => (
       </div>
     </div>
   </section>
-);
-
-/* Clean SVG illustration for AI Camera */
-const AICameraSVG = () => (
-  <motion.svg
-    width="200"
-    height="120"
-    viewBox="0 0 200 140"
-    fill="none"
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-  >
-    <rect x="50" y="30" width="100" height="70" rx="12" stroke="hsl(var(--border))" strokeWidth="1.5" fill="hsl(var(--secondary))" />
-    <circle cx="100" cy="60" r="22" stroke="hsl(var(--border))" strokeWidth="1.5" fill="hsl(var(--background))" />
-    <circle cx="100" cy="60" r="14" stroke="hsl(var(--sohub-orange) / 0.4)" strokeWidth="1.5" fill="hsl(var(--sohub-orange) / 0.05)" />
-    <motion.circle cx="100" cy="60" r="6" fill="hsl(var(--sohub-orange) / 0.3)" animate={{ scale: [0.8, 1.1, 0.8] }} transition={{ duration: 3, repeat: Infinity }} />
-    <rect x="68" y="86" width="24" height="8" rx="2" fill="hsl(var(--sohub-orange) / 0.15)" stroke="hsl(var(--sohub-orange) / 0.3)" strokeWidth="0.5" />
-    <motion.text x="80" y="93" textAnchor="middle" fontSize="5" fontWeight="600" fill="hsl(var(--sohub-orange))">AI</motion.text>
-    <rect x="92" y="100" width="16" height="20" rx="2" stroke="hsl(var(--border))" strokeWidth="1" fill="hsl(var(--secondary))" />
-    <rect x="82" y="118" width="36" height="6" rx="3" stroke="hsl(var(--border))" strokeWidth="1" fill="hsl(var(--secondary))" />
-    {[28, 36, 44].map((r, i) => (
-      <motion.circle
-        key={i}
-        cx="100"
-        cy="60"
-        r={r}
-        stroke="hsl(var(--sohub-orange) / 0.08)"
-        strokeWidth="1"
-        fill="none"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: [0.8, 1.1, 0.8], opacity: [0, 0.3, 0] }}
-        transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
-      />
-    ))}
-  </motion.svg>
 );
 
 export default DeploymentSection;

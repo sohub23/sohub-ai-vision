@@ -44,7 +44,6 @@ const Footer = () => (
             <li><a href="/products/edge-engine" className="hover:text-foreground transition-colors">Edge Engine</a></li>
             <li><a href="/products/standalone-camera" className="hover:text-foreground transition-colors">Standalone Camera</a></li>
             <li><a href="/#capabilities" className="hover:text-foreground transition-colors">Capabilities</a></li>
-            <li><a href="/#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
           </ul>
         </div>
 

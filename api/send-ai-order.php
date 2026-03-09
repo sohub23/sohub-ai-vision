@@ -134,7 +134,7 @@ if ($productType === 'edge-engine-custom') {
     <tr><td class='label'>Phone:</td><td><strong>$phone</strong></td></tr>
     <tr><td class='label'>Email:</td><td>" . ($email ?: 'Not provided') . "</td></tr>
     <tr><td class='label'>Location:</td><td>$location</td></tr>
-    <tr><td class='label'>Total Amount:</td><td><strong style='color:#18B5FE;font-size:18px'>৳" . number_format($totalPrice) . "</strong></td></tr>
+    <tr><td class='label'>Total Amount:</td><td><strong style='color:#18B5FE;font-size:18px'>" . number_format($totalPrice) . " BDT</strong></td></tr>
     </table>
     <p style='color:#666;font-size:12px;margin-top:30px'>Order received at: " . date('d M Y, h:i A') . "</p>
     </body>

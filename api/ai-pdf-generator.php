@@ -105,9 +105,11 @@ function generateAIOrderPDF($name, $company, $phone, $email, $location, $notes, 
     
     // Add-ons
     foreach ($addOns as $addon) {
-        $addonPrice = getAddonPrice($addon);
+        $addonName = is_array($addon) ? $addon['name'] : $addon;
+        $addonPrice = is_array($addon) ? $addon['price'] : getAddonPrice($addon);
+        
         if ($addonPrice >= 0) {
-            $pdf->Cell(100, 6, '+ ' . $addon, 1, 0, 'L');
+            $pdf->Cell(100, 6, '+ ' . $addonName, 1, 0, 'L');
             $pdf->Cell(30, 6, $quantity, 1, 0, 'C');
             $pdf->Cell(50, 6, number_format($addonPrice * $quantity), 1, 1, 'R');
         }
