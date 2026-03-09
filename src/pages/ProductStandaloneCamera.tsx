@@ -401,22 +401,28 @@ const ProductStandaloneCamera = () => {
                               : "border-border bg-background hover:border-sohub-orange/20"
                               }`}
                           >
-                            <div className="flex justify-between items-start mb-4">
-                              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${selectedAlgoCount === count ? "bg-sohub-orange/10 text-sohub-orange" : "bg-secondary text-muted-foreground"}`}>
-                                <Cpu className="w-5 h-5" />
+                            <div className="flex justify-between items-start mb-6">
+                              <div className="flex items-center gap-3">
+                                <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${selectedAlgoCount === count ? "bg-sohub-orange/10 text-sohub-orange" : "bg-secondary text-muted-foreground"}`}>
+                                  <Cpu className="w-5 h-5" />
+                                </div>
+                                <div>
+                                  <p className="text-[10px] font-bold text-sohub-orange/60 uppercase tracking-wider leading-none mb-0.5">SOHUB Vision</p>
+                                  <p className="text-[11px] font-bold text-foreground/40 uppercase tracking-wide leading-none">AI Camera</p>
+                                </div>
                               </div>
-                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedAlgoCount === count ? "border-sohub-orange bg-sohub-orange" : "border-border"}`}>
+                              <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center transition-colors ${selectedAlgoCount === count ? "border-sohub-orange bg-sohub-orange" : "border-border"}`}>
                                 {selectedAlgoCount === count && <div className="w-2 h-2 rounded-full bg-white" />}
                               </div>
                             </div>
-                            <div className="mb-1">
-                              <p className="text-[10px] font-bold text-sohub-orange/60 uppercase tracking-wider leading-none mb-0.5">SOHUB Vision</p>
-                              <p className="text-xs font-bold text-foreground/40 uppercase tracking-wide leading-none mb-2">AI Camera</p>
-                              <h4 className="font-bold text-foreground text-lg leading-tight">{count} AI Algorithm{count > 1 ? 's' : ''}</h4>
+
+                            <div className="mb-4">
+                              <h4 className="font-bold text-foreground text-lg leading-tight mb-1">{count} AI Algorithm{count > 1 ? 's' : ''}</h4>
+                              <p className="text-xs text-muted-foreground">
+                                {count === 1 ? 'Essential detections' : 'Full suite of 4 detections'}
+                              </p>
                             </div>
-                            <p className="text-xs text-muted-foreground mb-4">
-                              {count === 1 ? 'Essential detections' : 'Full suite of 4 detections'}
-                            </p>
+
                             <span className="text-xl font-extrabold text-foreground">{formatPrice(algoPrices[count as 1 | 4])}</span>
                           </motion.div>
                         ))}
