@@ -126,7 +126,7 @@ const Navbar = () => {
         className={`bg-secondary/50 border-b border-border/50 transition-all duration-300 overflow-hidden ${scrolled ? "max-h-0 opacity-0" : "max-h-20 opacity-100"
           }`}
       >
-        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8 py-2">
+        <div className="mx-auto max-w-[93%] section-container py-0.5">
           <div className="flex items-center justify-between">
             <a
               href="https://sohub.com.bd/"
@@ -139,11 +139,11 @@ const Navbar = () => {
                 alt="Solution Hub"
                 className="h-8"
               />
-              <p className="text-xs md:text-sm text-muted-foreground">
-                <span className="hidden sm:inline">
+              <p className="text-[10px] md:text-xs text-muted-foreground">
+                <span className="hidden md:inline">
                   Solution Hub Technologies(SOHUB) Owned & Operated
                 </span>
-                <span className="sm:hidden">SOHUB Owned & Operated</span>
+                <span className="md:hidden">SOHUB owned & operated</span>
               </p>
             </a>
             <DropdownMenu modal={false} onOpenChange={setDropdownOpen}>
@@ -151,7 +151,7 @@ const Navbar = () => {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-[12px] sm:text-sm text-muted-foreground hover:bg-transparent hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 flex items-center gap-1 mr-[-1rem] sm:mr-0"
+                  className="text-xs hover:bg-transparent hover:text-foreground focus-visible:ring-0 focus-visible:ring-offset-0 text-muted-foreground gap-1 md:mr-0 -mr-4"
                 >
                   Our Initiatives
                   {dropdownOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -211,8 +211,7 @@ const Navbar = () => {
       >
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8 flex items-center justify-between h-14">
           <a href="/" className="flex items-center gap-1.5">
-            <span className="text-xl font-extrabold tracking-tight text-foreground">SOHUB</span>
-            <span className="text-xl font-light text-sohub-orange">AI Vision</span>
+            <img src="/logo/sohub_ai.png" alt="SOHUB AI Vision" className="h-8" />
           </a>
 
           {/* Desktop nav */}
