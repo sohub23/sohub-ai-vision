@@ -7,14 +7,13 @@ const socialLinks = [
 ];
 
 const Footer = () => (
-  <footer className="py-16 border-t border-border bg-sohub-gray-50">
+  <footer className="pt-16 border-t border-border bg-sohub-gray-50">
     <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
-      <div className="grid md:grid-cols-4 gap-10 mb-12">
+      <div className="grid md:grid-cols-4 gap-10">
         {/* Brand */}
         <div className="md:col-span-2">
           <a href="/" className="flex items-center gap-2 mb-3">
-            <span className="text-xl font-bold text-foreground">SOHUB</span>
-            <span className="text-xl font-light text-sohub-orange">AI Vision</span>
+            <img src="/logo/sohub_ai.png" alt="SOHUB AI Vision" className="h-8" />
           </a>
           <p className="text-sm text-muted-foreground max-w-sm leading-relaxed mb-5">
             SOHUB AI Vision — edge AI for real-time surveillance understanding. The first product in the SOHUB AI ecosystem. Built for Bangladesh.
@@ -34,40 +33,38 @@ const Footer = () => (
               </a>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground/60">A product initiative by SOHUB</p>
         </div>
 
-        {/* Product links */}
-        <div>
-          <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-foreground mb-4">Products</h4>
-          <ul className="space-y-2.5 text-sm text-muted-foreground">
-            <li><a href="/products/edge-engine" className="hover:text-foreground transition-colors">Edge Engine</a></li>
-            <li><a href="/products/standalone-camera" className="hover:text-foreground transition-colors">Standalone Camera</a></li>
-            <li><a href="/#capabilities" className="hover:text-foreground transition-colors">Capabilities</a></li>
-          </ul>
-        </div>
+        {/* Product and Company links side by side on mobile, separate columns on desktop */}
+        <div className="grid grid-cols-2 md:contents gap-10">
+          {/* Product links */}
+          <div>
+            <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-foreground mb-4">Products</h4>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
+              <li><a href="/products/edge-engine" className="hover:text-foreground transition-colors">Edge Engine</a></li>
+              <li><a href="/products/standalone-camera" className="hover:text-foreground transition-colors">Standalone Camera</a></li>
+              <li><a href="/#capabilities" className="hover:text-foreground transition-colors">Capabilities</a></li>
+            </ul>
+          </div>
 
-        {/* Company links */}
-        <div>
-          <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-foreground mb-4">Company</h4>
-          <ul className="space-y-2.5 text-sm text-muted-foreground">
-            <li><a href="/about" className="hover:text-foreground transition-colors">About Us</a></li>
-            <li><a href="/#deployment" className="hover:text-foreground transition-colors">Deployment</a></li>
-            <li><a href="/contact" className="hover:text-foreground transition-colors">Contact</a></li>
-            <li><a href="/#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
-          </ul>
+          {/* Company links */}
+          <div>
+            <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-foreground mb-4">Company</h4>
+            <ul className="space-y-2.5 text-sm text-muted-foreground">
+              <li><a href="/about" className="hover:text-foreground transition-colors">About Us</a></li>
+              <li><a href="/#deployment" className="hover:text-foreground transition-colors">Deployment</a></li>
+              <li><a href="/contact" className="hover:text-foreground transition-colors">Contact</a></li>
+              <li><a href="/#faq" className="hover:text-foreground transition-colors">FAQ</a></li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div className="pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
-        <p className="text-xs text-muted-foreground/60">
+      <div className="py-8 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div><p className="text-xs text-muted-foreground/60">A product initiative by SOHUB</p></div>
+        <p className="text-xs text-muted-foreground/60 te">
           © {new Date().getFullYear()} SOHUB. All rights reserved.
         </p>
-        <div className="flex items-center gap-6 text-xs text-muted-foreground/60">
-          <span>Dhaka, Bangladesh</span>
-          <span>·</span>
-          <a href="mailto:info@sohub.com.bd" className="hover:text-foreground transition-colors">info@sohub.com.bd</a>
-        </div>
       </div>
     </div>
   </footer>

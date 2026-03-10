@@ -17,10 +17,10 @@ const Index = () => (
   <div className="min-h-screen bg-background">
     <Navbar />
     <HeroSection />
+    <VideoShowcaseSection />
     <ProblemSection />
     <ShiftSection />
     <CapabilitiesSection />
-    <VideoShowcaseSection />
     <DeploymentSection />
     <HowItWorksSection />
     <WhyOfflineSection />

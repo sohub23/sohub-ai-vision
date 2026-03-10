@@ -133,7 +133,7 @@ const VideoShowcaseSection = () => {
                     <div className="w-full h-full relative">
                       {video.type === "youtube" ? (
                         <img
-                          src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
+                          src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
                           alt={`SOHUB AI Vision demo: ${video.title}`}
                           className="w-full h-full object-cover"
                           loading="lazy"
@@ -147,22 +147,16 @@ const VideoShowcaseSection = () => {
                           preload="metadata"
                         />
                       )}
-                      <div className="absolute inset-0 bg-foreground/40 flex items-center justify-center group-hover:bg-foreground/50 transition-colors">
-                        <div className="w-10 h-10 rounded-full bg-sohub-orange flex items-center justify-center group-hover:scale-110 transition-transform">
-                          <Play className="w-4 h-4 text-white fill-current ml-0.5" />
+                      <div className="absolute inset-0 bg-foreground/20 flex items-center justify-center group-hover:bg-foreground/30 transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-sohub-orange/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                          <Play className="w-4 h-4 text-primary-foreground ml-0.5" />
                         </div>
-                      </div>
-
-                      {/* Title Badge */}
-                      <div className="absolute bottom-2 left-2 right-2 bg-gradient-to-r from-sohub-orange to-sohub-orange/80 backdrop-blur-sm rounded px-2 py-1 shadow-lg">
-                        <p className="font-semibold text-white text-xs truncate">
-                          {video.title}
-                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
-                </motion.div>
+                <p className="text-xs text-muted-foreground mt-2 font-medium text-center truncate">{video.title}</p>
+              </motion.div>
             ))}
           </div>
         </div>

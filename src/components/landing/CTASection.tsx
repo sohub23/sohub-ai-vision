@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "./ScrollReveal";
 import { motion } from "framer-motion";
+import ContactModal from "@/components/ContactModal";
 
 const CTASection = () => (
   <section id="contact" className="relative py-24 md:py-32 overflow-hidden">
@@ -32,13 +33,18 @@ const CTASection = () => (
               Let's make prevention normal.
             </h2>
             <p className="text-muted-foreground text-body-lg mb-10">
-              Explore our deployment options and choose the right product for your needs.
+              Ready to deploy AI Vision? Contact us to discuss your surveillance needs.
             </p>
           </motion.div>
-          <div className="flex justify-center">
-            <a href="#deployment">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <ContactModal>
               <Button variant="hero" size="lg" className="rounded-xl text-base px-10 py-6 shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.4)]">
-                Deployment
+                Contact Us
+              </Button>
+            </ContactModal>
+            <a href="#deployment">
+              <Button variant="outline" size="lg" className="rounded-xl text-base px-10 py-6 border-border hover:bg-secondary">
+                View Products
               </Button>
             </a>
           </div>

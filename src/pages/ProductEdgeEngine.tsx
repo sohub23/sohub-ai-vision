@@ -42,9 +42,8 @@ const benefits = [
 
 const addOns = [
   { id: "install", name: "Professional Installation", priceStr: "5,000 BDT", price: 5000, desc: "On-site setup and camera configuration" },
-  { id: "training", name: "On-Site Training", priceStr: "3,000 BDT", price: 3000, desc: "Staff training on dashboard and alerts" },
-  { id: "warranty", name: "Extended Warranty", priceStr: "8,000 BDT/yr", price: 8000, desc: "Additional 1-year hardware warranty" },
-  { id: "support", name: "Priority Support", priceStr: "5,000 BDT/yr", price: 5000, desc: "Dedicated support line and 4-hour response" },
+  { id: "training", name: "On-Site Training", priceStr: "3,500 BDT", price: 3500, desc: "Expert-led training to help your team set up and operate the system effectively." },
+  { id: "remote-training", name: "Remote Training", priceStr: "0.00 BDT", price: 0, desc: "Online training sessions to get the most out of your camera." },
 ];
 
 const faqs = [
@@ -81,6 +80,8 @@ const ProductEdgeEngine = () => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [activeSpecTab, setActiveSpecTab] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [showSpecs, setShowSpecs] = useState(false);
 
   useEffect(() => {
     if (window.location.hash === '#order-section') {
@@ -285,211 +286,7 @@ const ProductEdgeEngine = () => {
           </div>
         </div>
       </section>
-
-      {/* How it connects - Visual diagram */}
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
-          <ScrollReveal>
-            <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Architecture</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">How It Connects</h2>
-            <p className="text-center text-muted-foreground text-body-lg mb-16 max-w-lg mx-auto">One device processes your entire camera network locally.</p>
-          </ScrollReveal>
-
-          <div className="max-w-4xl mx-auto">
-            <div className="relative p-8 md:p-12 rounded-3xl border border-border/60 bg-gradient-to-br from-secondary/20 to-transparent">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
-                {/* Cameras */}
-                <div className="flex flex-col gap-3">
-                  {["Camera 1", "Camera 2", "Camera 3", "Camera 4"].map((cam, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.1 + i * 0.1 }}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-green-500/60" />
-                      <span className="text-xs font-medium text-foreground">{cam}</span>
-                    </motion.div>
-                  ))}
-                </div>
-
-                {/* Arrow */}
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
-                  className="origin-left hidden md:block"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-16 h-[2px] bg-gradient-to-r from-border to-sohub-orange/40" />
-                    <Network className="w-4 h-4 text-sohub-orange/60" />
-                    <div className="w-16 h-[2px] bg-gradient-to-r from-sohub-orange/40 to-border" />
-                  </div>
-                  <p className="text-[10px] text-muted-foreground text-center mt-1">LAN</p>
-                </motion.div>
-
-                {/* Mobile arrow */}
-                <div className="md:hidden text-muted-foreground">
-                  <svg width="12" height="28" viewBox="0 0 12 28"><path d="M6 0V24M6 24L1 18M6 24L11 18" stroke="currentColor" strokeWidth="1.5" fill="none" /></svg>
-                </div>
-
-                {/* Engine */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.6 }}
-                  className="px-8 py-6 rounded-2xl border-2 border-sohub-orange/30 bg-gradient-to-b from-sohub-orange/[0.06] to-transparent shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.1)]"
-                >
-                  <div className="flex items-center gap-3 mb-2">
-                    <Server className="w-5 h-5 text-sohub-orange" />
-                    <span className="text-sm font-bold text-foreground">Edge Engine</span>
-                  </div>
-                  <div className="flex gap-1.5 mt-3">
-                    <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="w-2 h-2 rounded-full bg-sohub-orange" />
-                    <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }} className="w-2 h-2 rounded-full bg-green-500" />
-                    <div className="w-2 h-2 rounded-full bg-muted-foreground/20" />
-                  </div>
-                </motion.div>
-
-                {/* Arrow */}
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="origin-left hidden md:block"
-                >
-                  <div className="flex items-center gap-2">
-                    <div className="w-16 h-[2px] bg-gradient-to-r from-border to-sohub-orange/40" />
-                    <Activity className="w-4 h-4 text-sohub-orange/60" />
-                  </div>
-                </motion.div>
-
-                <div className="md:hidden text-muted-foreground">
-                  <svg width="12" height="28" viewBox="0 0 12 28"><path d="M6 0V24M6 24L1 18M6 24L11 18" stroke="currentColor" strokeWidth="1.5" fill="none" /></svg>
-                </div>
-
-                {/* Outputs */}
-                <div className="flex flex-col gap-3">
-                  {["Alert", "Snapshot", "Alarm", "Webhook"].map((out, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: 20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: 0.9 + i * 0.08 }}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-sohub-orange/50" />
-                      <span className="text-xs font-medium text-foreground">{out}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-24 md:py-32 bg-sohub-gray-50">
-        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
-          <ScrollReveal>
-            <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Benefits</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">Why Edge Engine?</h2>
-            <p className="text-center text-muted-foreground text-body-lg mb-20 max-w-xl mx-auto">Purpose-built for centralized, multi-camera AI processing.</p>
-          </ScrollReveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {benefits.map((b, i) => (
-              <ScrollReveal key={i} delay={i * 0.06}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  className="p-7 rounded-2xl border border-border/80 bg-background hover:border-sohub-orange/25 hover:shadow-[0_12px_40px_-10px_hsl(0,0%,0%,0.06)] transition-all duration-300 group h-full"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-sohub-orange/[0.07] flex items-center justify-center text-sohub-orange mb-5 group-hover:bg-sohub-orange/[0.12] group-hover:shadow-[0_4px_16px_-4px_hsl(199,100%,50%,0.15)] transition-all duration-300">{b.icon}</div>
-                  <h3 className="font-bold text-foreground mb-2 text-[15px]">{b.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
-                </motion.div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Specifications */}
-      <section className="py-24 md:py-32">
-        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
-          <ScrollReveal>
-            <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Specs</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
-          </ScrollReveal>
-          <div className="flex justify-center mb-10">
-            <div className="inline-flex bg-secondary/50 p-1 rounded-xl">
-              <button
-                onClick={() => setActiveSpecTab(0)}
-                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 0 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                4 Channels
-              </button>
-              <button
-                onClick={() => setActiveSpecTab(1)}
-                className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 1 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
-              >
-                8 Channels
-              </button>
-            </div>
-          </div>
-
-          <div className="max-w-3xl mx-auto bg-background rounded-3xl border border-border/80 overflow-hidden shadow-[0_4px_20px_-8px_hsl(0,0%,0%,0.05)]">
-            {(activeSpecTab === 0 ? specs4Channel : specs8Channel).map((s, i) => (
-              <motion.div
-                key={`${activeSpecTab}-${i}`}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.04 }}
-                className={`flex justify-between items-center py-5 px-7 ${i < (activeSpecTab === 0 ? specs4Channel : specs8Channel).length - 1 ? "border-b border-border/50" : ""} ${i % 2 === 0 ? "bg-secondary/15" : ""}`}
-              >
-                <span className="text-sm font-semibold text-foreground w-1/3">{s.label}</span>
-                <span className="text-sm text-muted-foreground font-medium w-2/3 text-right">{s.value}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Videos */}
-      {videos.length > 0 && (
-        <section className="py-24 md:py-32 bg-sohub-gray-50">
-          <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
-            <ScrollReveal>
-              <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Demo</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
-            </ScrollReveal>
-            <div className="max-w-3xl mx-auto">
-              {videos.map(v => (
-                <div key={v.id} className="rounded-3xl overflow-hidden border border-border shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.08)]">
-                  <div className="aspect-video">
-                    <iframe
-                      src={`https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1&loop=1&playlist=${v.id}`}
-                      title={v.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      className="w-full h-full"
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Checkout / Pricing */}
+ {/* Checkout / Pricing */}
       <section className="py-24 md:py-32" id="order-section">
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8 lg:px-24">
           <ScrollReveal>
@@ -538,6 +335,52 @@ const ProductEdgeEngine = () => {
                         ))}
                       </div>
                     </div>
+
+                    {/* Selected Configuration Display */}
+                    {selectedTier < 2 && (
+                      <div className="bg-card border border-border rounded-2xl p-6">
+                        <div className="grid md:grid-cols-12 gap-6">
+                          <div className="md:col-span-9">
+                            <h3 className="text-lg font-semibold mb-3">
+                              SOHUB AI Vision Edge Engine ({tiers[selectedTier].channels})
+                            </h3>
+                            <button
+                              onClick={() => setShowSpecs(!showSpecs)}
+                              className="flex items-center gap-1 text-xs text-sohub-orange mb-3 hover:underline"
+                            >
+                              {showSpecs ? "Hide" : "View"} specifications
+                              {showSpecs ? <ChevronDown className="w-3 h-3 rotate-180" /> : <ChevronDown className="w-3 h-3" />}
+                            </button>
+                            <AnimatePresence>
+                              {showSpecs && (
+                                <motion.div
+                                  initial={{ height: 0, opacity: 0 }}
+                                  animate={{ height: "auto", opacity: 1 }}
+                                  exit={{ height: 0, opacity: 0 }}
+                                  className="overflow-hidden"
+                                >
+                                  <div className="grid sm:grid-cols-2 gap-2 pt-3 border-t border-border/50">
+                                    {(selectedTier === 0 ? specs4Channel : specs8Channel).map(s => (
+                                      <div key={s.label} className="text-xs">
+                                        <span className="text-muted-foreground">{s.label}:</span>{" "}
+                                        <span className="font-medium">{s.value}</span>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                          <div className="md:col-span-3 flex justify-center">
+                            <img
+                              src={aiEngineImg}
+                              alt="AI Edge Engine"
+                              className="w-32 h-32 object-cover rounded-lg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {/* Add-ons */}
                     <div>
@@ -718,6 +561,241 @@ const ProductEdgeEngine = () => {
           </AnimatePresence>
         </div>
       </section>
+      
+      {/* How it connects - Visual diagram */}
+      <section className="py-24 md:py-32">
+        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+          <ScrollReveal>
+            <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Architecture</p>
+            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">How It Connects</h2>
+            <p className="text-center text-muted-foreground text-body-lg mb-16 max-w-lg mx-auto">One device processes your entire camera network locally.</p>
+          </ScrollReveal>
+
+          <div className="max-w-4xl mx-auto">
+            <div className="relative p-8 md:p-12 rounded-3xl border border-border/60 bg-gradient-to-br from-secondary/20 to-transparent">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
+                {/* Cameras */}
+                <div className="flex flex-col gap-3">
+                  {["Camera 1", "Camera 2", "Camera 3", "Camera 4"].map((cam, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 + i * 0.1 }}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-green-500/60" />
+                      <span className="text-xs font-medium text-foreground">{cam}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Arrow */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5, duration: 0.6 }}
+                  className="origin-left hidden md:block"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 h-[2px] bg-gradient-to-r from-border to-sohub-orange/40" />
+                    <Network className="w-4 h-4 text-sohub-orange/60" />
+                    <div className="w-16 h-[2px] bg-gradient-to-r from-sohub-orange/40 to-border" />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground text-center mt-1">LAN</p>
+                </motion.div>
+
+                {/* Mobile arrow */}
+                <div className="md:hidden text-muted-foreground">
+                  <svg width="12" height="28" viewBox="0 0 12 28"><path d="M6 0V24M6 24L1 18M6 24L11 18" stroke="currentColor" strokeWidth="1.5" fill="none" /></svg>
+                </div>
+
+                {/* Engine */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.6 }}
+                  className="px-8 py-6 rounded-2xl border-2 border-sohub-orange/30 bg-gradient-to-b from-sohub-orange/[0.06] to-transparent shadow-[0_8px_30px_-6px_hsl(199,100%,50%,0.1)]"
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    <Server className="w-5 h-5 text-sohub-orange" />
+                    <span className="text-sm font-bold text-foreground">Edge Engine</span>
+                  </div>
+                  <div className="flex gap-1.5 mt-3">
+                    <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity }} className="w-2 h-2 rounded-full bg-sohub-orange" />
+                    <motion.div animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2, repeat: Infinity, delay: 0.5 }} className="w-2 h-2 rounded-full bg-green-500" />
+                    <div className="w-2 h-2 rounded-full bg-muted-foreground/20" />
+                  </div>
+                </motion.div>
+
+                {/* Arrow */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="origin-left hidden md:block"
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="w-16 h-[2px] bg-gradient-to-r from-border to-sohub-orange/40" />
+                    <Activity className="w-4 h-4 text-sohub-orange/60" />
+                  </div>
+                </motion.div>
+
+                <div className="md:hidden text-muted-foreground">
+                  <svg width="12" height="28" viewBox="0 0 12 28"><path d="M6 0V24M6 24L1 18M6 24L11 18" stroke="currentColor" strokeWidth="1.5" fill="none" /></svg>
+                </div>
+
+                {/* Outputs */}
+                <div className="flex flex-col gap-3">
+                  {["Alert", "Snapshot", "Alarm", "Webhook"].map((out, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.9 + i * 0.08 }}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
+                    >
+                      <div className="w-2 h-2 rounded-full bg-sohub-orange/50" />
+                      <span className="text-xs font-medium text-foreground">{out}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits */}
+      <section className="py-24 md:py-32 bg-sohub-gray-50">
+        <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+          <ScrollReveal>
+            <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Benefits</p>
+            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">Why Edge Engine?</h2>
+            <p className="text-center text-muted-foreground text-body-lg mb-20 max-w-xl mx-auto">Purpose-built for centralized, multi-camera AI processing.</p>
+          </ScrollReveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {benefits.map((b, i) => (
+              <ScrollReveal key={i} delay={i * 0.06}>
+                <motion.div
+                  whileHover={{ y: -6 }}
+                  className="p-7 rounded-2xl border border-border/80 bg-background hover:border-sohub-orange/25 hover:shadow-[0_12px_40px_-10px_hsl(0,0%,0%,0.06)] transition-all duration-300 group h-full"
+                >
+                  <div className="w-12 h-12 rounded-2xl bg-sohub-orange/[0.07] flex items-center justify-center text-sohub-orange mb-5 group-hover:bg-sohub-orange/[0.12] group-hover:shadow-[0_4px_16px_-4px_hsl(199,100%,50%,0.15)] transition-all duration-300">{b.icon}</div>
+                  <h3 className="font-bold text-foreground mb-2 text-[15px]">{b.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{b.desc}</p>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Specifications - HIDDEN */}
+      {false && (
+        <section className="py-24 md:py-32">
+          <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+            <ScrollReveal>
+              <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Specs</p>
+              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
+            </ScrollReveal>
+            <div className="flex justify-center mb-10">
+              <div className="inline-flex bg-secondary/50 p-1 rounded-xl">
+                <button
+                  onClick={() => setActiveSpecTab(0)}
+                  className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 0 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  4 Channels
+                </button>
+                <button
+                  onClick={() => setActiveSpecTab(1)}
+                  className={`px-8 py-3 rounded-lg text-sm font-semibold transition-all ${activeSpecTab === 1 ? 'bg-background shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                >
+                  8 Channels
+                </button>
+              </div>
+            </div>
+
+            <div className="max-w-3xl mx-auto bg-background rounded-3xl border border-border/80 overflow-hidden shadow-[0_4px_20px_-8px_hsl(0,0%,0%,0.05)]">
+              {(activeSpecTab === 0 ? specs4Channel : specs8Channel).map((s, i) => (
+                <motion.div
+                  key={`${activeSpecTab}-${i}`}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.04 }}
+                  className={`flex justify-between items-center py-5 px-7 ${i < (activeSpecTab === 0 ? specs4Channel : specs8Channel).length - 1 ? "border-b border-border/50" : ""} ${i % 2 === 0 ? "bg-secondary/15" : ""}`}
+                >
+                  <span className="text-sm font-semibold text-foreground w-1/3">{s.label}</span>
+                  <span className="text-sm text-muted-foreground font-medium w-2/3 text-right">{s.value}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Videos - HIDDEN */}
+      {false && videos.length > 0 && (
+        <section className="py-24 md:py-32 bg-sohub-gray-50">
+          <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+            <ScrollReveal>
+              <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Demo</p>
+              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
+            </ScrollReveal>
+            <div className="max-w-3xl mx-auto">
+              {videos.map(v => (
+                <div key={v.id} className="rounded-3xl overflow-hidden border border-border shadow-[0_20px_60px_-15px_hsl(0,0%,0%,0.08)]">
+                  <div className="aspect-video">
+                    {!isVideoPlaying ? (
+                      <div className="group cursor-pointer" onClick={() => setIsVideoPlaying(true)}>
+                        <div className="relative aspect-video bg-muted">
+                          <img
+                            src={`https://img.youtube.com/vi/${v.id}/maxresdefault.jpg`}
+                            alt={v.title}
+                            className="w-full h-full object-cover"
+                          />
+                          
+                          {/* Overlay */}
+                          <div className="absolute inset-0 bg-foreground/40 flex items-center justify-center group-hover:bg-foreground/50 transition-colors">
+                            <div className="w-16 h-16 rounded-full bg-sohub-orange flex items-center justify-center group-hover:scale-110 transition-transform">
+                              <svg className="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z"/>
+                              </svg>
+                            </div>
+                          </div>
+
+                          {/* Title Badge */}
+                          <div className="absolute bottom-4 left-4 right-4 bg-gradient-to-r from-sohub-orange to-sohub-orange/80 backdrop-blur-sm rounded px-3 py-2 shadow-lg">
+                            <p className="font-semibold text-white text-sm">
+                              {v.title}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <iframe
+                        src={`https://www.youtube.com/embed/${v.id}?autoplay=1`}
+                        title={v.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full"
+                      />
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+     
 
       {/* FAQ */}
       <section className="py-24 md:py-32 bg-sohub-gray-50">

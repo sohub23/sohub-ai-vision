@@ -126,7 +126,7 @@ const Navbar = () => {
         className={`bg-secondary/50 border-b border-border/50 transition-all duration-300 overflow-hidden ${scrolled ? "max-h-0 opacity-0" : "max-h-20 opacity-100"
           }`}
       >
-        <div className="mx-auto max-w-[93%] section-container py-0.5">
+        <div className="mx-auto max-w-[1250px] px-4 sm:px-6 md:px-2 py-0.5">
           <div className="flex items-center justify-between">
             <a
               href="https://sohub.com.bd/"
