@@ -1,4 +1,5 @@
 import { Facebook, Linkedin, Youtube } from "lucide-react";
+import OurInitiatives from "./OurInitiatives";
 
 const socialLinks = [
   { icon: <Facebook className="w-4 h-4" />, href: "https://www.facebook.com/solutionhubtechnologies/", label: "Facebook" },
@@ -7,8 +8,10 @@ const socialLinks = [
 ];
 
 const Footer = () => (
-  <footer className="pt-16 border-t border-border bg-sohub-gray-50">
-    <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
+  <>
+    <OurInitiatives />
+    <footer className="pt-16 border-t border-border bg-sohub-gray-50">
+      <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
       <div className="grid md:grid-cols-4 gap-10">
         {/* Brand */}
         <div className="md:col-span-2">
@@ -68,6 +71,7 @@ const Footer = () => (
       </div>
     </div>
   </footer>
+  </>
 );
 
 export default Footer;

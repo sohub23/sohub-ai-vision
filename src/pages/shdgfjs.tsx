@@ -111,7 +111,7 @@ const ProductStandaloneCamera = () => {
         const selectedAddOnNames = selectedAddOns.map(idx => addOns[idx].name);
 
         try {
-            const response = await fetch("/server-api/send-ai-order.php", {
+            const response = await fetch("/api/send-order", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

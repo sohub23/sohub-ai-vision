@@ -131,8 +131,7 @@ const ProductEdgeEngine = () => {
     const isCustom = selectedTier === 2;
 
     try {
-      // Using the absolute URL to target the remote environment as XAMPP is not installed locally
-      const response = await fetch("/server-api/send-ai-order.php", {
+      const response = await fetch("/api/send-order", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

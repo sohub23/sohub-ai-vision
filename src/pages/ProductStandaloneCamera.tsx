@@ -162,7 +162,7 @@ const ProductStandaloneCamera = () => {
     setLoading(true);
 
     try {
-      const apiUrl = '/api/send-ai-order.php';
+      const apiUrl = '/api/send-order';
       
       const response = await fetch(apiUrl, {
         method: 'POST',
