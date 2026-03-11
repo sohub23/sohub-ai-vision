@@ -12,8 +12,8 @@ interface Initiative {
     isActive: boolean;
 }
 
-const BASE_URL = 'https://sohub.netlify.app';
-const API_URL = 'https://sohub.netlify.app/api/initiatives.json';
+const BASE_URL = 'https://sohub.com.bd';
+const API_URL = 'https://sohub.ncom.bd/api/initiatives.json';
 
 const isCurrentSite = (item: Initiative) =>
     item.id === 'sohub-ai' || item.name.toLowerCase().includes('sohub ai');
