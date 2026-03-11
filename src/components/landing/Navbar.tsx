@@ -57,27 +57,37 @@ const Navbar = () => {
       return;
     }
 
-    const observerOptions = {
-      root: null,
-      rootMargin: "-20% 0% -35% 0%",
-      threshold: 0.2,
+    const handleScroll = () => {
+      const sections = ["problem", "capabilities", "deployment", "faq"];
+      const scrollPosition = window.scrollY + 100; // Offset for header
+      
+      let currentSection = "";
+      
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          
+          // Check if we're within this section's boundaries
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+      
+      setActiveSection(currentSection);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
-
-    const sections = ["problem", "capabilities", "deployment", "faq"];
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    // Initial check
+    handleScroll();
+    
+    // Listen to scroll events
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [isHome]);
 
   useEffect(() => {
