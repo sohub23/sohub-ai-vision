@@ -13,6 +13,7 @@ import CTASection from "@/components/landing/CTASection";
 import FAQSection from "@/components/landing/FAQSection";
 import OurInitiatives from "@/components/landing/OurInitiatives";
 import Footer from "@/components/landing/Footer";
+import WhatsAppChat from "@/components/WhatsAppChat";
 
 const Index = () => (
   <div className="min-h-screen bg-background">
@@ -31,6 +32,7 @@ const Index = () => (
     <FAQSection />
     <OurInitiatives />
     <Footer />
+    <WhatsAppChat />
   </div>
 );
 

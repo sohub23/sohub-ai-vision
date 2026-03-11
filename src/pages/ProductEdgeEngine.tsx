@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/landing/ScrollReveal";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import WhatsAppChat from "@/components/WhatsAppChat";
 import aiEngineImg from "@/assets/ai_engine.png";
 
 const specs4Channel = [
@@ -831,6 +832,7 @@ const ProductEdgeEngine = () => {
       </section>
 
       <Footer />
+      <WhatsAppChat />
     </div>
   );
 };

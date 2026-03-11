@@ -7,6 +7,7 @@ import ScrollReveal from "@/components/landing/ScrollReveal";
 import SEOHead from "@/components/SEOHead";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import WhatsAppChat from "@/components/WhatsAppChat";
 import aiCameraImg from "@/assets/ai-vision-4p-2.png";
 import aiCamera1pImg from "@/assets/ai-vision-1p.png";
 
@@ -844,6 +845,7 @@ const ProductStandaloneCamera = () => {
       </section>
 
       <Footer />
+      <WhatsAppChat />
     </div>
   );
 };

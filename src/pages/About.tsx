@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
+import WhatsAppChat from "@/components/WhatsAppChat";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, Trophy, Target } from "lucide-react";
 import ScrollReveal from "@/components/landing/ScrollReveal";
@@ -125,6 +126,7 @@ const About = () => {
             </main>
 
             <Footer />
+            <WhatsAppChat />
         </div>
     );
 };
