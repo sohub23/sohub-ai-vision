@@ -11,7 +11,7 @@ const WhatsAppChat = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const whatsappNumber = "+8801784457062"; // Replace with actual SOHUB WhatsApp number
+  const whatsappNumber = "+8801833838965"; // Replace with actual SOHUB WhatsApp number
   const defaultMessage = "Hi! I'm interested in SOHUB AI Vision products. Can you help me?";
 
   const handleWhatsAppClick = () => {
