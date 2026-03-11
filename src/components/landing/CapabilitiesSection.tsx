@@ -7,7 +7,7 @@ const categories = [
   {
     icon: <Users className="w-5 h-5" />,
     title: "People & Safety",
-    desc: "Monitor human activity patterns and safety compliance",
+    desc: "Monitor human activity patterns & safety compliance",
     models: ["Intrusion Detection", "Fall Detection", "PPE Compliance", "Crowd Density", "Loitering"],
     color: "from-blue-500/10 to-blue-500/5",
   },
