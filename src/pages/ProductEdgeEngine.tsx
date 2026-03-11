@@ -9,6 +9,7 @@ import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import WhatsAppChat from "@/components/WhatsAppChat";
 import aiEngineImg from "@/assets/ai_engine.png";
+import aiEngineImg_v1 from "@/assets/ai_engine_v1.png";
 
 const specs4Channel = [
   { label: "Processor", value: "NPU 4Tops, CPU 8 Cores" },
@@ -373,7 +374,7 @@ const ProductEdgeEngine = () => {
                           </div>
                           <div className="md:col-span-3 flex justify-center">
                             <img
-                              src={aiEngineImg}
+                              src={aiEngineImg_v1}
                               alt="AI Edge Engine"
                               className="w-32 h-32 object-cover rounded-lg"
                             />
