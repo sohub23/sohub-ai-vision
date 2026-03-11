@@ -583,7 +583,7 @@ const ProductEdgeEngine = () => {
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.1 + i * 0.1 }}
-                      className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
+                      className="flex items-center gap-1 px-4 py-2.5 rounded-xl bg-background border border-border/80 shadow-sm"
                     >
                       <div className="w-2 h-2 rounded-full bg-green-500/60" />
                       <span className="text-xs font-medium text-foreground">{cam}</span>
