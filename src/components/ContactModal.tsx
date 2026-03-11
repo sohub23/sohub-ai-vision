@@ -17,7 +17,7 @@ const ContactModal = ({ children }: ContactModalProps) => {
     setLoading(true);
     
     try {
-      const response = await fetch('http://202.59.208.112/websites/sohub-vision-spark-main/api/send-contact-email.php', {
+      const response = await fetch('/api/send-contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
