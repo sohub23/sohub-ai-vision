@@ -201,7 +201,7 @@ const ProductEdgeEngine = () => {
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sohub-orange/[0.07] border border-sohub-orange/15 text-xs font-semibold text-sohub-orange uppercase tracking-[0.15em] mb-8">
                 <Server className="w-3.5 h-3.5" /> Edge Processing Unit
               </span>
-              <h1 className="text-4xl md:text-[3.5rem] font-extrabold tracking-tight text-foreground mb-5 leading-[1.08]">
+              <h1 className="text-section-mobile md:text-section font-extrabold tracking-tight text-foreground mb-5 leading-[1.08]">
                 SOHUB AI Vision
                 <br />
                 <span className="bg-gradient-to-r from-sohub-orange to-[hsl(189,100%,55%)] bg-clip-text text-transparent">Edge Engine</span>
@@ -291,7 +291,7 @@ const ProductEdgeEngine = () => {
           <ScrollReveal>
             <div className="text-center mb-14">
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-4">Order</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-4 font-extrabold">Configure Your Order</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-4 font-extrabold">Configure Your Order</h2>
               <p className="text-center text-muted-foreground text-body-lg max-w-xl mx-auto">Select your configuration and submit an order request.</p>
             </div>
           </ScrollReveal>
@@ -566,7 +566,7 @@ const ProductEdgeEngine = () => {
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
           <ScrollReveal>
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Architecture</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">How It Connects</h2>
+            <h2 className="text-section-mobile md:text-section text-center text-foreground mb-5 font-extrabold">How It Connects</h2>
             <p className="text-center text-muted-foreground text-body-lg mb-16 max-w-lg mx-auto">One device processes your entire camera network locally.</p>
           </ScrollReveal>
 
@@ -675,7 +675,7 @@ const ProductEdgeEngine = () => {
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
           <ScrollReveal>
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Benefits</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">Why Edge Engine?</h2>
+            <h2 className="text-section-mobile md:text-section text-center text-foreground mb-5 font-extrabold">Why Edge Engine?</h2>
             <p className="text-center text-muted-foreground text-body-lg mb-20 max-w-xl mx-auto">Purpose-built for centralized, multi-camera AI processing.</p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -701,7 +701,7 @@ const ProductEdgeEngine = () => {
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
             <ScrollReveal>
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Specs</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
             </ScrollReveal>
             <div className="flex justify-center mb-10">
               <div className="inline-flex bg-secondary/50 p-1 rounded-xl">
@@ -745,7 +745,7 @@ const ProductEdgeEngine = () => {
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
             <ScrollReveal>
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Demo</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
             </ScrollReveal>
             <div className="max-w-3xl mx-auto">
               {videos.map(v => (
@@ -801,7 +801,7 @@ const ProductEdgeEngine = () => {
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
           <ScrollReveal>
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-4">FAQ</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">Frequently Asked Questions</h2>
+            <h2 className="text-section-mobile md:text-section text-center text-foreground mb-16 font-extrabold">Frequently Asked Questions</h2>
           </ScrollReveal>
           <div className="max-w-2xl mx-auto space-y-3">
             {faqs.map((faq, i) => (

@@ -11,6 +11,7 @@ import EngineeringSection from "@/components/landing/EngineeringSection";
 import ComingSoonSection from "@/components/landing/ComingSoonSection";
 import CTASection from "@/components/landing/CTASection";
 import FAQSection from "@/components/landing/FAQSection";
+import OurInitiatives from "@/components/landing/OurInitiatives";
 import Footer from "@/components/landing/Footer";
 
 const Index = () => (
@@ -28,6 +29,7 @@ const Index = () => (
     <ComingSoonSection />
     <CTASection />
     <FAQSection />
+    <OurInitiatives />
     <Footer />
   </div>
 );

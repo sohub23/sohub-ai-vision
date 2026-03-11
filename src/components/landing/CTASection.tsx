@@ -29,7 +29,7 @@ const CTASection = () => (
             transition={{ duration: 0.5 }}
           >
             <p className="text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-4">Get Started</p>
-            <h2 className="text-section-mobile md:text-[3rem] leading-tight font-extrabold text-foreground mb-4">
+            <h2 className="text-section-mobile md:text-section leading-tight font-extrabold text-foreground mb-4">
               Let's make prevention normal.
             </h2>
             <p className="text-muted-foreground text-body-lg mb-10">

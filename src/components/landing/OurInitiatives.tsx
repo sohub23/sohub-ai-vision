@@ -26,7 +26,7 @@ const DesktopOurInitiatives = ({ initiatives }: { initiatives: Initiative[] }) =
     const headerInView = useInView(headerRef, { once: true, margin: '-10%' });
 
     return (
-        <section id="initiatives" className="section-padding bg-secondary/30 relative overflow-hidden py-16">
+        <section id="initiatives" className="section-padding  relative overflow-hidden py-16">
             <div className="max-w-6xl mx-auto px-6 md:px-8 relative z-10">
                 {/* Header */}
                 <motion.div

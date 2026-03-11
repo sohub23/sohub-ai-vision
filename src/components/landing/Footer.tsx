@@ -1,5 +1,5 @@
 import { Facebook, Linkedin, Youtube } from "lucide-react";
-import OurInitiatives from "./OurInitiatives";
+
 
 const socialLinks = [
   { icon: <Facebook className="w-4 h-4" />, href: "https://www.facebook.com/solutionhubtechnologies/", label: "Facebook" },
@@ -9,7 +9,7 @@ const socialLinks = [
 
 const Footer = () => (
   <>
-    <OurInitiatives />
+    
     <footer className="pt-16 border-t border-border bg-sohub-gray-50">
       <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
       <div className="grid md:grid-cols-4 gap-10">
@@ -54,7 +54,6 @@ const Footer = () => (
           <div>
             <h4 className="text-xs font-semibold tracking-[0.15em] uppercase text-foreground mb-4">Company</h4>
             <ul className="space-y-2.5 text-sm text-muted-foreground">
-              <li><a href="/about" className="hover:text-foreground transition-colors">About Us</a></li>
               <li><a href="/#deployment" className="hover:text-foreground transition-colors">Deployment</a></li>
               <li><a href="/contact" className="hover:text-foreground transition-colors">Contact</a></li>
               <li><a href="/#faq" className="hover:text-foreground transition-colors">FAQ</a></li>

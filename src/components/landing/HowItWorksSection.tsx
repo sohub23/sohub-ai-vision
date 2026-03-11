@@ -17,7 +17,7 @@ const HowItWorksSection = () => (
     <div className="container mx-auto px-6">
       <ScrollReveal>
         <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">How It Works</p>
-        <h2 className="text-section-mobile md:text-[3.25rem] text-center text-foreground mb-4 font-extrabold leading-tight">
+        <h2 className="text-section-mobile md:text-section text-center text-foreground mb-4 font-extrabold leading-tight">
           Simple. Local. Reliable.
         </h2>
         <p className="text-center text-muted-foreground text-body-lg max-w-md mx-auto mb-20">

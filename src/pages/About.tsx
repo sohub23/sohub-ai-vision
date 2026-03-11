@@ -20,7 +20,7 @@ const About = () => {
                 <div className="container mx-auto px-4 max-w-4xl">
                     {/* Header Section */}
                     <div className="text-center mb-16">
-                        <h1 className="text-4xl md:text-6xl font-semibold tracking-tight text-[#111827] mb-12">
+                        <h1 className="text-section-mobile md:text-section font-semibold tracking-tight text-[#111827] mb-12">
                             About SOHUB <span className="text-[#0DC7FF]">AI Vision</span>
                         </h1>
                         <p className="text-[1.15rem] text-[#4B5563] italic max-w-3xl mx-auto leading-relaxed">

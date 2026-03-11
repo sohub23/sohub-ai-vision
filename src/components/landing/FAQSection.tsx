@@ -11,7 +11,7 @@ const faqs = [
 ];
 
 const FAQSection = () => (
-  <section id="faq" className="py-24 md:py-32 relative">
+  <section id="faq" className="bg-secondary/30 py-24 md:py-32 relative">
     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
     
     <div className="container mx-auto px-6 max-w-2xl">

@@ -11,7 +11,7 @@ const DeploymentSection = () => (
     <div className="container mx-auto px-6">
       <ScrollReveal>
         <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-4">Deployment</p>
-        <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-4 font-extrabold leading-tight">
+        <h2 className="text-section-mobile md:text-section text-center text-foreground mb-4 font-extrabold leading-tight">
           Two ways to add intelligence.
         </h2>
         <p className="text-center text-muted-foreground text-body-lg max-w-xl mx-auto mb-10">
@@ -29,9 +29,10 @@ const DeploymentSection = () => (
             className="group relative flex flex-col h-full rounded-2xl border border-border/80 bg-background hover:border-sohub-orange/25 shadow-[0_1px_3px_0_hsl(0,0%,0%,0.04)] hover:shadow-[0_16px_40px_-8px_hsl(0,0%,0%,0.08)] transition-all duration-300 overflow-hidden"
           >
             {/* Visual Section */}
-            <div className="w-full aspect-[6/3] relative overflow-hidden border-b border-border/40 bg-secondary/10">
-              <img src={aiEngineImg} alt="SOHUB AI Vision Edge Engine" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div className="w-full relative border-b border-border/40 bg-secondary/10 p-2 rounded-t-[15px] overflow-hidden flex justify-center py-4">
+              <img src={aiEngineImg} alt="SOHUB AI Vision Edge Engine" className="w-1/2 h-auto object-contain group-hover:scale-105 transition-transform duration-500 rounded-t-[13px]" />
             </div>
+            
 
             <div className="relative p-6 flex-1 flex flex-col">
               {/* Badge + Title */}
@@ -81,8 +82,8 @@ const DeploymentSection = () => (
             className="group relative flex flex-col h-full rounded-2xl border border-border/80 bg-background hover:border-sohub-orange/25 shadow-[0_1px_3px_0_hsl(0,0%,0%,0.04)] hover:shadow-[0_16px_40px_-8px_hsl(0,0%,0%,0.08)] transition-all duration-300"
           >
             {/* Visual Section */}
-            <div className="w-full aspect-[6/3] relative border-b border-border/40 bg-secondary/10 p-2 rounded-t-[15px] overflow-hidden">
-              <img src={aiCameraImg} alt="SOHUB Vision AI Camera" className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 rounded-t-[13px]" />
+            <div className="w-full relative border-b border-border/40 bg-secondary/10 p-2 rounded-t-[15px] overflow-hidden flex justify-center py-4">
+              <img src={aiCameraImg} alt="SOHUB Vision AI Camera" className="w-1/2 h-auto object-contain group-hover:scale-105 transition-transform duration-500 rounded-t-[13px]" />
             </div>
 
             <motion.div

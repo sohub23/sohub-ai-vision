@@ -24,7 +24,7 @@ const HeroSection = () => (
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-[1.75rem] md:text-[2.5rem] leading-[1.1] font-extrabold tracking-tight text-foreground mb-4"
+          className="text-section-mobile md:text-section leading-[1.1] font-extrabold tracking-tight text-foreground mb-4"
         >
           Your cameras already see.
           <br />

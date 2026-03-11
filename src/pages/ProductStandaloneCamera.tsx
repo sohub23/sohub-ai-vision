@@ -233,7 +233,7 @@ const ProductStandaloneCamera = () => {
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sohub-orange/[0.07] border border-sohub-orange/15 text-xs font-semibold text-sohub-orange uppercase tracking-[0.15em] mb-8">
                 <Camera className="w-3.5 h-3.5" /> All-in-One AI Camera
               </span>
-              <h1 className="text-4xl md:text-[3.5rem] font-extrabold tracking-tight text-foreground mb-5 leading-[1.08]">
+              <h1 className="text-section-mobile md:text-section font-extrabold tracking-tight text-foreground mb-5 leading-[1.08]">
                 SOHUB Vision
                 <br />
                 <span className="bg-gradient-to-r from-sohub-orange to-[hsl(189,100%,55%)] bg-clip-text text-transparent">AI Camera</span>
@@ -323,7 +323,7 @@ const ProductStandaloneCamera = () => {
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sohub-orange/[0.07] border border-sohub-orange/15 text-xs font-semibold text-sohub-orange uppercase tracking-[0.15em] mb-6">
                 <ShoppingBag className="w-3.5 h-3.5" /> Configure & Order
               </span>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
+              <h2 className="text-section-mobile md:text-section font-bold tracking-tight text-foreground mb-4">
                 Get Your AI Camera
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -662,7 +662,7 @@ const ProductStandaloneCamera = () => {
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
             <ScrollReveal>
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Pre-Loaded</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">Built-in AI Models</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-5 font-extrabold">Built-in AI Models</h2>
               <p className="text-center text-muted-foreground text-body-lg mb-16 max-w-lg mx-auto">Ready to detect from the moment you power on.</p>
             </ScrollReveal>
 
@@ -691,7 +691,7 @@ const ProductStandaloneCamera = () => {
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
           <ScrollReveal>
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Benefits</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-5 font-extrabold">Why Standalone Camera?</h2>
+            <h2 className="text-section-mobile md:text-section text-center text-foreground mb-5 font-extrabold">Why Standalone Camera?</h2>
             <p className="text-center text-muted-foreground text-body-lg mb-20 max-w-xl mx-auto">Perfect for small setups, single entry points, or rapid deployment.</p>
           </ScrollReveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
@@ -717,7 +717,7 @@ const ProductStandaloneCamera = () => {
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
             <ScrollReveal>
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Specs</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-20 font-extrabold">Technical Specifications</h2>
             </ScrollReveal>
             <div className="max-w-2xl mx-auto bg-background rounded-3xl border border-border/80 overflow-hidden shadow-[0_4px_20px_-8px_hsl(0,0%,0%,0.05)]">
               {currentSpecs.map((s, i) => (
@@ -744,7 +744,7 @@ const ProductStandaloneCamera = () => {
           <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
             <ScrollReveal>
               <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">Demo</p>
-              <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
+              <h2 className="text-section-mobile md:text-section text-center text-foreground mb-16 font-extrabold">See It In Action</h2>
             </ScrollReveal>
             <div className="max-w-3xl mx-auto">
               {videos.map(v => (
@@ -814,7 +814,7 @@ const ProductStandaloneCamera = () => {
         <div className="mx-auto max-w-[1300px] px-4 sm:px-6 md:px-8">
           <ScrollReveal>
             <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-4">FAQ</p>
-            <h2 className="text-section-mobile md:text-[3rem] text-center text-foreground mb-16 font-extrabold">Frequently Asked Questions</h2>
+            <h2 className="text-section-mobile md:text-section text-center text-foreground mb-16 font-extrabold">Frequently Asked Questions</h2>
           </ScrollReveal>
           <div className="max-w-2xl mx-auto space-y-3">
             {faqs.map((faq, i) => (

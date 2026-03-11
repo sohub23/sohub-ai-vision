@@ -15,7 +15,7 @@ const Contact = () => {
                 <div className="container mx-auto px-4 max-w-5xl">
                     {/* Header Section */}
                     <div className="text-center mb-14 space-y-3 mt-10">
-                        <h1 className="text-[2.75rem] md:text-[3.25rem] font-bold tracking-[-0.02em] text-[#0DC7FF]">
+                        <h1 className="text-section-mobile md:text-section font-bold tracking-[-0.02em] text-[#0DC7FF]">
                             Get in Touch
                         </h1>
                         <p className="text-[1.05rem] text-[#6B7280] max-w-2xl mx-auto leading-relaxed">

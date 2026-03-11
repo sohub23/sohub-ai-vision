@@ -15,7 +15,7 @@ const ProblemSection = () => (
     <div className="container mx-auto px-6">
       <ScrollReveal>
         <p className="text-center text-xs font-semibold tracking-[0.2em] uppercase text-sohub-orange mb-5">The Problem</p>
-        <h2 className="text-section-mobile md:text-[3.25rem] text-center text-foreground mb-5 font-extrabold leading-tight">
+        <h2 className="text-section-mobile md:text-section text-center text-foreground mb-5 font-extrabold leading-tight">
           CCTV records. It doesn't prevent.
         </h2>
         <p className="text-center text-muted-foreground text-body-lg max-w-xl mx-auto mb-20">
