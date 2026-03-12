@@ -109,24 +109,9 @@ const Navbar = () => {
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    const isHashLink = href.startsWith("/#");
-
-    if (isHashLink) {
-      const hash = href.replace("/", "");
-
-      if (isHome) {
-        // If already on home page, prevent default router navigation and just scroll
-        e.preventDefault();
-        const id = hash.replace("#", "");
-        const element = document.getElementById(id);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-          window.history.pushState(null, "", hash);
-        }
-      }
-      // If on another page, let Link component handle the navigation to /#hash
-      // The useEffect above will handle the scrolling once the page loads
-    }
+    // Just close the mobile menu. The Link component will handle the 'to' navigation.
+    // The useEffect that listens for location.hash changes (line 41) will handle smooth scrolling.
+    setOpen(false);
   };
 
   return (
