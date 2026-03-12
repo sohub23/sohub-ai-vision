@@ -187,10 +187,10 @@ const Navbar = () => {
                           }`}
                       >
                         <img
-                          src={`https://sohub.netlify.app${initiative.logo}`}
-                          alt={initiative.name}
-                          className="w-full h-full object-contain"
-                        />
+                              src={getInitiativeLogo(initiative)}
+                              alt={initiative.name}
+                              className="w-full h-full object-contain"
+                            />
                       </a>
                     ) : (
                       <div
