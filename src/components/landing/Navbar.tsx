@@ -60,14 +60,14 @@ const Navbar = () => {
     const handleScroll = () => {
       const sections = ["problem", "capabilities", "deployment", "faq"];
       const scrollPosition = window.scrollY + 100; // Offset for header
-      
+
       let currentSection = "";
-      
+
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          
+
           // Check if we're within this section's boundaries
           if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
             currentSection = sectionId;
@@ -75,16 +75,16 @@ const Navbar = () => {
           }
         }
       }
-      
+
       setActiveSection(currentSection);
     };
 
     // Initial check
     handleScroll();
-    
+
     // Listen to scroll events
     window.addEventListener("scroll", handleScroll, { passive: true });
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -175,33 +175,55 @@ const Navbar = () => {
                       initiative.id === "ai" ||
                       initiative.name.toLowerCase() === "sohub ai" ||
                       initiative.name.toLowerCase().includes("vision");
-                    return initiative.href ? (
-                      <a
-                        key={initiative.id}
-                        href={initiative.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex items-center justify-center p-4 rounded-lg border ${isCurrentSite
-                          ? "border-sohub-orange bg-sohub-orange/10 ring-2 ring-sohub-orange/30"
-                          : "border-border"
-                          }`}
-                      >
-                        <img
+
+                    const getInitiativeLogo = (initiative: Initiative) => {
+                      const logoPath = initiative.logo;
+                      const name = initiative.name.toLowerCase();
+
+                      // 1. Use API path if available (prefer sohub.com.bd)
+                      if (logoPath) {
+                        if (logoPath.startsWith('/api')) {
+                          return `https://sohub.com.bd${logoPath}`;
+                        }
+                        if (logoPath.startsWith('http')) {
+                          return logoPath;
+                        }
+                      }
+
+                      // 2. Fallbacks
+                      if (isCurrentSite) return "/logo/sohub_ai.png";
+                      return `https://sohub.com.bd${logoPath}`;
+                    };
+
+                    return (
+                      <div key={initiative.id}>
+                        {initiative.href ? (
+                          <a
+                            href={initiative.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`flex items-center justify-center p-4 rounded-lg border ${isCurrentSite
+                              ? "border-sohub-orange bg-sohub-orange/10 ring-2 ring-sohub-orange/30"
+                              : "border-border"
+                              }`}
+                          >
+                            <img
                               src={getInitiativeLogo(initiative)}
                               alt={initiative.name}
                               className="w-full h-full object-contain"
                             />
-                      </a>
-                    ) : (
-                      <div
-                        key={initiative.id}
-                        className="flex items-center justify-center p-4 rounded-lg border border-border opacity-50 cursor-not-allowed"
-                      >
-                        <img
-                          src={`https://sohub.netlify.app${initiative.logo}`}
-                          alt={initiative.name}
-                          className="w-full h-full object-contain"
-                        />
+                          </a>
+                        ) : (
+                          <div
+                            className="flex items-center justify-center p-4 rounded-lg border border-border opacity-50 cursor-not-allowed"
+                          >
+                            <img
+                              src={getInitiativeLogo(initiative)}
+                              alt={initiative.name}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
+                        )}
                       </div>
                     );
                   })}
