@@ -83,9 +83,9 @@ app.post('/api/send-order', async (req, res) => {
     <p style="margin: 0; color: #5f6368;">Best regards,<br><span style="color: #202124; font-weight: 500;">The SOHUB Team</span></p>
   </div>
   <div style="padding: 24px; background-color: #f8f9fa; border-top: 1px solid #e0e0e0; text-align: center; color: #5f6368; font-size: 12px; line-height: 1.6;">
-    <strong>SOHUB Technologies</strong><br>
+    <strong>SOHUB AI</strong><br>
     Building next-gen AI & Machine infrastructure for Bangladesh<br>
-    <a href="https://www.sohub.com.bd" style="color: #18B5FE; text-decoration: none;">www.sohub.com.bd</a>
+    <a href="https://www.ai.sohub.com.bd" style="color: #18B5FE; text-decoration: none;">www.ai.sohub.com.bd</a>
   </div>
 </div>
     `;
@@ -98,7 +98,7 @@ app.post('/api/send-order', async (req, res) => {
       html: adminHtml,
       attachments: pdfBuffer ? [
         {
-          filename: 'SOHUB_Quotation.pdf',
+          filename: 'SOHUB_AI_Quatation.pdf',
           content: pdfBuffer,
           contentType: 'application/pdf'
         }
@@ -114,7 +114,7 @@ app.post('/api/send-order', async (req, res) => {
         html: customerHtml,
         attachments: pdfBuffer ? [
           {
-            filename: 'SOHUB_Quotation.pdf',
+            filename: 'SOHUB_AI_Quatation.pdf',
             content: pdfBuffer,
             contentType: 'application/pdf'
           }
@@ -206,9 +206,9 @@ app.post('/api/send-contact', async (req, res) => {
     <p style="margin: 32px 0 0 0; color: #5f6368;">Best regards,<br><strong style="color: #18B5FE;">SOHUB AI Vision Team</strong><br>Solution Hub Technologies</p>
   </div>
   <div style="padding: 24px; background-color: #f8f9fa; border-top: 1px solid #e0e0e0; text-align: center; color: #5f6368; font-size: 12px; line-height: 1.6;">
-    <strong>SOHUB Technologies</strong><br>
+    <strong>SOHUB AI</strong><br>
     Building next-gen AI & Machine infrastructure for Bangladesh<br>
-    <a href="https://ai.sohub.com.bd" style="color: #18B5FE; text-decoration: none;">ai.sohub.com.bd</a>
+    <a href="https://ai.sohub.com.bd" style="color: #18B5FE; text-decoration: none;">www.ai.sohub.com.bd</a>
   </div>
 </div>
     `;
