@@ -37,10 +37,13 @@ const DesktopOurInitiatives = ({ initiatives }: { initiatives: Initiative[] }) =
                     className="text-center mb-14"
                 >
                     <h2
-                        className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground"
+                        className="text-[48px] font-normal tracking-tight text-[#0d0925] leading-[1.15]"
                     >
-                        Our Initiatives
+                        Explore Our Initiatives
                     </h2>
+                    <p className="text-lg text-[#5f6368] max-w-2xl mx-auto mt-4 font-normal">
+                        Each initiatives solves a real problem.
+                    </p>
                 </motion.div>
 
                 {/* Grid — 4 columns */}
@@ -123,10 +126,13 @@ const MobileOurInitiatives = ({ initiatives }: { initiatives: Initiative[] }) =>
                     className="text-center mb-6"
                 >
                     <h2
-                        className="text-[22px] font-medium tracking-tight text-foreground leading-[1.2]"
+                        className="text-[48px] font-normal tracking-tight text-[#0d0925] leading-[1.15]"
                     >
-                        Our Initiatives
+                        Explore Our Initiatives
                     </h2>
+                    <p className="text-lg text-[#5f6368] max-w-2xl mx-auto mt-4 font-normal">
+                        Each initiatives solves a real problem.
+                    </p>
                 </motion.div>
 
                 {/* List — single column */}
