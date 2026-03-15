@@ -156,8 +156,8 @@ const Navbar = () => {
                 <div className="grid grid-cols-3 gap-3">
                   {initiatives.map((initiative) => {
                     const isCurrentSite =
+                      initiative.id === "sohub-ai" ||
                       initiative.id === "vision" ||
-                      initiative.id === "ai" ||
                       initiative.name.toLowerCase() === "sohub ai" ||
                       initiative.name.toLowerCase().includes("vision");
 
