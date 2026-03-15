@@ -1,0 +1,21 @@
+{
+  "name": "SOHUB AI Vision",
+  "short_name": "SOHUB AI",
+  "description": "Offline AI Vision Engine for Bangladesh",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
