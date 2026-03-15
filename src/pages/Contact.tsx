@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/landing/Navbar";
 import Footer from "@/components/landing/Footer";
 import WhatsAppChat from "@/components/WhatsAppChat";
@@ -5,9 +6,69 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Mail, Phone, Clock } from "lucide-react";
+import { Mail, Phone, Clock, Send } from "lucide-react";
+import { toast } from "sonner";
 
 const Contact = () => {
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        message: ""
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        
+        if (!formData.firstName || !formData.message) {
+            toast.error("Please fill in the required fields (First Name and Message).");
+            return;
+        }
+
+        setIsSubmitting(true);
+        
+        const fullName = `${formData.firstName} ${formData.lastName}`.trim();
+        const fullMessage = formData.company 
+            ? `Company: ${formData.company}\n\n${formData.message}`
+            : formData.message;
+
+        try {
+            const response = await fetch('/api/send-contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  name: fullName,
+                  phone: 'Provided via Web Form', // Assuming phone is not in this UI
+                  email: formData.email,
+                  message: fullMessage,
+                  productType: 'General Inquiry',
+                  adminOnly: true // Do not send customer confirmation
+                })
+            });
+              
+            const result = await response.json();
+              
+            if (result.success) {
+                toast.success("Message sent successfully! We will get back to you soon.");
+                setFormData({ firstName: "", lastName: "", email: "", company: "", message: "" });
+            } else {
+                toast.error('Failed to send message. Please try again later.');
+            }
+        } catch (error) {
+            console.error('Contact form submission error:', error);
+            toast.error('Failed to send message. Please check your connection.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="min-h-screen bg-[#FAFAFA] flex flex-col font-sans">
             <Navbar />
@@ -94,40 +155,56 @@ const Contact = () => {
                                     </CardDescription>
                                 </CardHeader>
                                 <CardContent className="px-8 pb-8">
-                                    <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+                                    <form className="space-y-5" onSubmit={handleSubmit}>
                                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                                             <div className="space-y-1.5">
-                                                <label htmlFor="firstName" className="text-[0.85rem] font-semibold text-[#374151]">First Name</label>
-                                                <Input id="firstName" placeholder="John" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
+                                                <label htmlFor="firstName" className="text-[0.85rem] font-semibold text-[#374151]">First Name *</label>
+                                                <Input id="firstName" value={formData.firstName} onChange={handleChange} required placeholder="John" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
                                             </div>
                                             <div className="space-y-1.5">
                                                 <label htmlFor="lastName" className="text-[0.85rem] font-semibold text-[#374151]">Last Name</label>
-                                                <Input id="lastName" placeholder="Doe" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
+                                                <Input id="lastName" value={formData.lastName} onChange={handleChange} placeholder="Doe" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
                                             </div>
                                         </div>
 
                                         <div className="space-y-1.5">
                                             <label htmlFor="email" className="text-[0.85rem] font-semibold text-[#374151]">Email Address</label>
-                                            <Input id="email" type="email" placeholder="john.doe@company.com" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
+                                            <Input id="email" value={formData.email} onChange={handleChange} type="email" placeholder="john.doe@company.com" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
                                         </div>
 
                                         <div className="space-y-1.5">
                                             <label htmlFor="company" className="text-[0.85rem] font-semibold text-[#374151]">Company (Optional)</label>
-                                            <Input id="company" placeholder="Your Company Name" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
+                                            <Input id="company" value={formData.company} onChange={handleChange} placeholder="Your Company Name" className="h-11 border-[#E5E7EB] bg-white text-sm focus-visible:ring-[#0DC7FF]" />
                                         </div>
 
                                         <div className="space-y-1.5">
-                                            <label htmlFor="message" className="text-[0.85rem] font-semibold text-[#374151]">Message</label>
+                                            <label htmlFor="message" className="text-[0.85rem] font-semibold text-[#374151]">Message *</label>
                                             <Textarea
                                                 id="message"
+                                                value={formData.message}
+                                                onChange={handleChange}
+                                                required
                                                 placeholder="Tell us about your project or how we can help..."
                                                 className="min-h-[120px] bg-white border-[#E5E7EB] text-sm resize-y focus-visible:ring-[#0DC7FF]"
                                             />
                                         </div>
 
                                         <div className="pt-2">
-                                            <Button className="w-full h-12 bg-[#0DC7FF] hover:bg-[#0bb2e6] text-white font-semibold text-[0.95rem] rounded-xl shadow-[0_4px_14px_0_rgba(13,199,255,0.39)] transition-all" size="lg">
-                                                Send Message
+                                            <Button disabled={isSubmitting} type="submit" className="w-full h-12 bg-[#0DC7FF] hover:bg-[#0bb2e6] text-white font-semibold flex items-center justify-center gap-2 text-[0.95rem] rounded-xl shadow-[0_4px_14px_0_rgba(13,199,255,0.39)] transition-all" size="lg">
+                                                {isSubmitting ? (
+                                                    <>
+                                                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                        </svg>
+                                                        Sending...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        Send Message
+                                                        <Send size={16} />
+                                                    </>
+                                                )}
                                             </Button>
                                         </div>
                                     </form>
