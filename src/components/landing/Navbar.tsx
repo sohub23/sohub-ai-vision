@@ -118,7 +118,7 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 right-0 z-50">
       {/* Top bar */}
       <div
-        className={`bg-secondary/50 border-b border-border/50 transition-all duration-300 overflow-hidden ${scrolled ? "max-h-0 opacity-0" : "max-h-20 opacity-100"
+        className={`bg-secondary/50 transition-all duration-300 overflow-hidden ${scrolled ? "max-h-0 opacity-0" : "max-h-20 opacity-100 border-b border-border/50"
           }`}
       >
         <div className="mx-auto max-w-[1250px] px-4 sm:px-6 md:px-2 py-0.5">
